@@ -1,5 +1,5 @@
 # New File Test
-def main:
+def main():
     print("New File Test")
 
-main
+main()
