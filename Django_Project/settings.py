@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'learnsecurecoding',
         'USER': 'django',
         'PASSWORD' :  'mJJvM1tOPol0GoQ',
-        'HOST' : 'ec2-3-86-215-192.compute-1.amazonaws.com',
+        'HOST' : 'localhost',
         'PORT' : '3306'
 
     }
