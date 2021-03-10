@@ -3,6 +3,15 @@
 #include <stddef.h>
 #include <stdint.h>
 
+/**
+ * This is a method that gets the value from an array at a particular index.
+ * There is no check that makes sure the index is a valid bounds.
+ * Change the code so that it returns -1 when an out-of-bounds read is performed.
+ * 
+ * @param array Pointer to the array.
+ * @param len Length of the array.
+ * @param index Index of array to return.
+ * */
 int getValueFromArray(int *array, int len, int index) {
 
 	int value;
