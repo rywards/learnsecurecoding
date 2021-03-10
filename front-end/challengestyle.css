@@ -1,0 +1,28 @@
+body {
+    background-color: cadetblue;
+}
+/* styles */
+.lessonTitle {
+    font-family: cursive;
+    text-align: center;
+    border-style: solid;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+
+}
+.challengeBox {
+    border-style: solid;
+    outline: 3px;
+    outline-offset: 10px;
+    border-radius: 10px;
+    background-color: chartreuse;
+}
+.codeEnter {
+    border-style: solid;
+    outline: 3px;
+    outline-offset: 10px;
+    border-radius: 10px;
+    border-color: coral;
+    background-color: darkgoldenrod;
+}
