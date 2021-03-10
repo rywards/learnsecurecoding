@@ -22,7 +22,7 @@ int getValueFromArray(int *array, int len, int index) {
 	return value;
 }
 
-
+// An example of a function that passes the checker test
 int getValueFromArrayGood(int *array, int len, int index) {
 	
 	int value;
@@ -42,9 +42,10 @@ int getValueFromArrayGood(int *array, int len, int index) {
 	return value;
 }
 
+// checker function
 int main() {
 	
-	
+	// Test data
    	int data[16] = {'T','h','i','s',' ','i','s',' ','m','y',' ','d','a','t','a','.'};
 	
 	//start out with our checks = true, and then if we get an invalid output, change to false
@@ -76,6 +77,7 @@ int main() {
 		}
 	}
 	
+	//print out whether pass or fail
 	printf("Regular (Expected) Values: %s\n", checkExpectedValues ? "PASS" : "FAIL");
 	printf("Negative Values: %s\n", checkNegativeValues ? "PASS" : "FAIL");
 	printf("Greater Values: %s\n", checkGreaterValues ? "PASS" : "FAIL");
