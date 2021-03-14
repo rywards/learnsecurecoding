@@ -1,0 +1,52 @@
+html
+	head
+		link(rel="stylesheet" href="/static/css/challengestyle.css")
+		link(rel="stylesheet" href="/static/css/w3.css")
+	body
+		div(class="lessonTitle")
+			h1 Learn Secure Coding
+			p 
+		p 
+		div(class="w3-container")
+			div(class="challengeBox")
+				div(class="w3-panel w3-card")
+				h3 
+					em Lesson: foo bar
+				p
+					p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ipsum enim, eleifend id dui vel, semper mattis ante. Aliquam venenatis, nulla ac tincidunt elementum, quam quam elementum massa, eu feugiat eros velit vitae elit. Nullam consectetur felis vel tortor dictum, porttitor vestibulum augue venenatis. Aliquam tempus pretium diam vel lacinia. Curabitur fermentum porta laoreet. Aenean gravida ante eget tincidunt hendrerit. In quis aliquam nunc. Nullam vitae massa aliquam, porta risus at, consequat velit.
+					
+					p Phasellus non blandit velit. Proin vel quam eu arcu lobortis dapibus et quis tellus. Vivamus commodo fermentum ex non viverra. Etiam scelerisque sem est, vehicula suscipit lacus ultrices rutrum. Aliquam tincidunt lorem eget eros lacinia, maximus tincidunt quam ornare. Sed dictum dictum neque, ut molestie nisi. Nulla eleifend volutpat ante sit amet fermentum.
+					
+					p Sed id elit sapien. Suspendisse potenti. Sed molestie sollicitudin diam tristique ultricies. Morbi quis augue purus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In auctor ante at purus dapibus blandit. Quisque accumsan lacinia consectetur. Cras feugiat mi vitae est sodales, sed iaculis elit suscipit. Vivamus pretium, lorem quis scelerisque congue, metus tortor dignissim arcu, non condimentum lectus felis nec magna. Duis gravida orci enim, at lacinia urna blandit eget. Proin sed mauris egestas, accumsan leo et, blandit velit.
+					
+					p Aliquam rhoncus elementum nunc, id pharetra libero dignissim ut. Pellentesque luctus, nulla ut pulvinar suscipit, dui ante scelerisque erat, ut tempus ante diam et urna. Nullam suscipit, ex ut maximus rhoncus, tortor arcu venenatis diam, tincidunt sagittis nisi risus et est. Vestibulum aliquet mollis orci, quis euismod tortor elementum vel. Donec vel quam est. Duis ligula neque, fermentum quis vestibulum et, laoreet accumsan massa. Sed ac luctus tortor, vel blandit massa. Aenean pulvinar vestibulum nibh in dictum. Nam tristique ipsum at faucibus porta. Integer consectetur nisl malesuada tortor cursus, nec vulputate diam mattis. Nulla tempus mauris ut dolor blandit eleifend in nec dolor.
+					
+					p Suspendisse sed sem vel ipsum laoreet molestie vitae ut enim. Maecenas et augue ac massa dignissim mollis. Maecenas sed tempus quam. Pellentesque maximus ante ultrices est accumsan auctor. Duis eu nulla id odio aliquam faucibus quis eu urna. Phasellus sem sapien, tempus ut vehicula id, lobortis convallis dolor. Vivamus eu blandit velit. Donec ac mauris a tortor iaculis porttitor. Fusce ornare nunc at elit elementum rhoncus. 
+			div(class="gotochallengebutton")
+				div(id="js_button_function")
+				//- Load React. Taken from tutorial page
+				//- Note: when deploying, replace "development.js" with "production.min.js".
+				script(src="https://unpkg.com/react@17/umd/react.development.js" crossorigin)
+				script(src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin)
+				//- Load our React component.
+				script(src="/static/js/gotochallenge.js")
+			div(class="codeEnter")
+				div(class="w3-panel w3-card")
+				pre
+					//- For block text (or for scripts), put a . after the tag name
+					code.
+						#include &lt;stdio.h&gt;
+						int main() {
+							// printf() displays the string inside quotation
+							printf("Hello, World!");
+							return 0;
+						}
+			div(id="backtolesson")
+				button(type="button" onclick="alert('Back to Lesson TEMP')") Back to Lesson
+			div(id="submitcode")
+				button(type="button" onclick="alert('Submit Code TEMP')") Submit Code
+			div(class="hints")
+				div(class="w3-panel w3-card")
+					p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+					div(id="proceed")
+						button(type="button" onclick="alert('Proceed TEMP')") Proceed

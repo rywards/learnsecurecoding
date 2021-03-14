@@ -28,3 +28,7 @@ class GroupViewSet(viewsets.ModelViewSet):
 def test(request):
     html = pug.render('./test.pug', {'var1': 'bar'})
     return HttpResponse(html)
+
+def challenge(request):
+    html = pug.render('./lesson-challenge', {'var1': 'bar'})
+    return HttpResponse(html)
