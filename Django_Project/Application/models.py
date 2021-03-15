@@ -10,7 +10,7 @@ class Unit(models.Model):
     unitOverview = models.CharField(max_length=3750,)
 
     class Meta: 
-        ordering = ['unitId']
+        ordering = ['unitID']
 
 
 class Lesson(models.Model):
