@@ -2,6 +2,9 @@ from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
 from Django_Project.Application.serializers import UserSerializer, GroupSerializer
+from django.http import HttpResponse
+
+import Django_Project.Application.pug as pug
 
 # Create your views here.
 class UserViewSet(viewsets.ModelViewSet):
@@ -21,3 +24,11 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
+    
+def test(request):
+    html = pug.render('./test.pug', {'var1': 'bar'})
+    return HttpResponse(html)
+
+def challenge(request):
+    html = pug.render('./lesson-challenge', {'var1': 'bar'})
+    return HttpResponse(html)

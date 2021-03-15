@@ -16,7 +16,7 @@ from decouple import config
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -29,7 +29,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['3.86.215.192','.localhost','http://ec2-3-86-215-192.compute-1.amazonaws.com/', 'ec2-3-86-215-192.compute-1.amazonaws.com']
+ALLOWED_HOSTS = ['3.86.215.192','.localhost','http://ec2-3-86-215-192.compute-1.amazonaws.com/', 'ec2-3-86-215-192.compute-1.amazonaws.com', '127.0.0.1']
 
 
 # Application definition
@@ -126,8 +126,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
+# Put static files in Django_Project/static
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static"
+]
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
