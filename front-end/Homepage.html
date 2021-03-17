@@ -1,19 +1,34 @@
-<html> 
+<!DOCTYPE html>
   <head>
     <title>Learn Secure Coding</title> 
+    <style>
+      .breadcrumbs {
+          padding: 10px;
+          font-family: sans-serif;
+      }
+
+      .breadcrumbs__item{
+        display: inline-block;
+      }
+
+      .breadcrumbs__item:not(:last-of-type)::after {
+        content: '/';
+        margin: 0 5px;
+      }
+
+    </style>
   </head>
  
-  <body> 
-    <h1>Learn Secure Coding</h1> 
-    <a href="Homepage.html">Home | </a>
-    <a href="challenge.html"> Lesson | </a>
-    <a href="https://www.Google.com/"> Resources | </a>
-    <a href="https://www.Google.com/"> Contact</a>
+  <body>
+    <h1>Learn Secure Coding</h1>  
+    <ul class="breadcrumbs">
+      <li class="breadcrumbs__item">
+        <a href="Homepage.html" class="breadcrumbs__link">Home </a>
+    </ul>
     <h2> Welcome to Learn Secure Coding! We'll have a better introduction soon. </h2>
   </body>
 
   <body> 
     <h1>Pick a Unit</h1>
-    <a href="challenge.html"> Unit 1</a>
+    <a href="UnitOverview.html"> Unit 1</a>
   </body>
-</html>

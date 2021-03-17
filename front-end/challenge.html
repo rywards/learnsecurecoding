@@ -4,20 +4,38 @@
 <!DOCTYPE html>
 <head>
     <link rel="stylesheet" href="challengestyle.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+      .breadcrumbs {
+          padding: 10px;
+          font-family: sans-serif;
+      }
+
+      .breadcrumbs__item{
+        display: inline-block;
+      }
+
+      .breadcrumbs__item:not(:last-of-type)::after {
+        content: '/';
+        margin: 0 5px;
+      }
+    </style> 
 </head>
 
 <body>
 
-<div class="lessonTitle">
-    <h1>Learn Secure Coding</h1>
-    <a href="Homepage.html">Home | </a>
-    <a href="challenge.html"> Lesson | </a>
-    <a href="https://www.Google.com/"> Resources | </a>
-    <a href="https://www.Google.com/"> Contact</a>
-    <p> </p>
-</div>
-
+    <ul class="breadcrumbs">
+      <li class="breadcrumbs__item">
+        <a href="Homepage.html" class="breadcrumbs__link">Home</a>
+      </li>
+      <li class="breadcrumbs__item">
+        <a href="UnitOverview.html" class="breadcrumbs__link">Unit Overview</a>
+      </li>
+      <li class="breadcrumbs__item">
+        <a href="challenge.html" class="breadcrumbs__link">Lesson n</a>
+      </li>
+    </ul>
+    
 <p> </p>
 
 <div class="w3-container"> 
