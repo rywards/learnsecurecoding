@@ -18,8 +18,8 @@ from Django_Project.Application import views
 from django.urls import path, include
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
+#router.register(r'users', views.UserViewSet)
+#router.register(r'groups', views.GroupViewSet)
 
 
 
@@ -29,5 +29,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('test', views.test),
-    path('challenge', views.challenge)
+    path('challenge', views.challenge),
+    path('', include('Django_Project.Application.urls')),
 ]
