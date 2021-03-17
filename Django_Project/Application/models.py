@@ -1,42 +1,53 @@
+# This is an auto-generated Django model module.
+# You'll have to do the following manually to clean this up:
+#   * Rearrange models' order
+#   * Make sure each model has one field with primary_key=True
+#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
+#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
+# Feel free to rename the models, but don't rename db_table values or field names.
+
+# Currently Django doesn't support On Update Cascade,
+# may need to use django signals for a workaround if needed
+
 from django.db import models
 
-#Currently Django doesn't support On Update Cascade,
-#may need to use django signals for a workaround if needed
 
-
-# Create your models here.
 class Unit(models.Model):
-    unitID = models.CharField(max_length=4, primary_key=True)
-    unitOverview = models.CharField(max_length=3750,)
+    unitid = models.CharField(db_column='unitID', primary_key=True, max_length=4)  # Field name made lowercase.
+    unitoverview = models.CharField(max_length=3750, blank=True, null=True)
 
-    class Meta: 
-        ordering = ['unitID']
+    class Meta:
+        managed = False
+        db_table = 'unit'
 
 
 class Lesson(models.Model):
-    lessonID = models.CharField(max_length=4, primary_key=True)
-    lesson_material = models.CharField(max_length=7500)
-    unitID = models.ForeignKey(Unit, on_delete= models.CASCADE)
+    lessonid = models.CharField(db_column='lessonID', primary_key=True, max_length=4)  # Field name made lowercase.
+    unitid = models.ForeignKey('Unit', db_column='unitID', blank=True, null=True, on_delete = models.CASCADE)  # Field name made lowercase.
+    lessonmaterial = models.CharField(max_length=7500, blank=True, null=True)
 
-    class Meta: 
-        ordering = ['lessonID']
-
+    class Meta:
+        managed = False
+        db_table = 'lesson'
 
 
 class Challenge(models.Model):
-    challengeID = models.CharField(max_length=4, primary_key=True)
-    challenge_overview = models.CharField(max_length=3750)
-    lessonId = models.ForeignKey(Lesson, on_delete= models.CASCADE)
+    challengeid = models.CharField(db_column='challengeID', primary_key=True, max_length=4)  # Field name made lowercase.
+    lessonid = models.ForeignKey('Lesson', db_column='lessonID', blank=True, null=True, on_delete = models.CASCADE)  # Field name made lowercase.
+    challengeoverview = models.CharField(max_length=3750, blank=True, null=True)
 
-    class Meta: 
-        ordering = ['challengeID']
+    class Meta:
+        managed = False
+        db_table = 'challenge'
 
 
-class User_Answers(models.Model):
-    userID = models.CharField(max_length=9, primary_key= True)
-    success_state = models.SmallIntegerField()
-    answer = models.CharField(max_length= 7500)
-    lessonId = models.ForeignKey(Lesson, on_delete=models.CASCADE)
 
-    class Meta: 
-        ordering = ['userID']
+class UsrAnswers(models.Model):
+    userid = models.AutoField(db_column='userID', primary_key=True)  # Field name made lowercase.
+    lessonid = models.ForeignKey(Lesson, db_column='lessonID', blank=True, null=True, on_delete = models.CASCADE)  # Field name made lowercase.
+    success_state = models.IntegerField(blank=True, null=True)
+    answer = models.CharField(max_length=7500, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'usr_answers'

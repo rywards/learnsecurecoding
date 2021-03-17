@@ -1,12 +1,34 @@
-from django.contrib.auth.models import User, Group
 from rest_framework import serializers
+from Django_Project.Application.models import Unit
+from Django_Project.Application.models import Lesson
+from Django_Project.Application.models import Challenge
+from Django_Project.Application.models import UsrAnswers
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta: 
-        model = User
-        fields = ['url', 'username', 'email', 'groups'] # example of insert wanted fields
 
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
+# Serializers for our different models: 
+# Allows us to translate a model instance into Python Native datatypes and
+# vice-versa. 
+# Used to help us render JSON files going out and 
+# to Parse JSON files coming in
+class UnitSerializer(serializers.ModelSerializer): 
     class Meta: 
-        model = Group
-        fields = ['url','name'] # example of insert wanted fields
+        model = Unit
+        fields = ['unitid','unitoverview']
+
+
+class LessonSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = Lesson
+        fields = ['lessonid','unitid','lessonmaterial']
+
+
+class ChallengeSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = Challenge
+        fields = ['challengeid','lessonid','challengeoverview']
+
+
+class UsrAnswerSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = UsrAnswers
+        fields = ['userid','lessonid','success_state','answer']
