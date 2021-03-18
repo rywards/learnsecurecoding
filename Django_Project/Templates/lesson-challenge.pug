@@ -4,6 +4,27 @@ html
 	head
 		link(rel="stylesheet" href="/static/css/challengestyle.css")
 		link(rel="stylesheet" href="/static/css/w3.css")
+style.
+	.breadcrumbs {
+    	padding: 10px;
+   		font-family: sans-serif;
+    	}
+	.breadcrumbs__item{
+   		display: inline-block;
+    }
+	.breadcrumbs__item:not(:last-of-type)::after {
+    	content: '/';
+    	margin: 0 5px;
+    }
+
+// list of pages
+ul.breadcrumbs
+	li.breadcrumbs__item
+   		a.breadcrumbs__link(href='/homepage') Home
+ 	li.breadcrumbs__item
+    	a.breadcrumbs__link(href='/unitoverview') Unit 1 Overview
+	li.breadcrumbs__item
+    	a.breadcrumbs__link(href='/challenge') Unit 1 Overview
 	body
 		div(class="lessonTitle")
 			h1 Learn Secure Coding
