@@ -15,11 +15,11 @@ def challenge(request):
 
 # unitoverview and homepage added by Ryan
 def unitoverview(request):
-    html = pug.render('./unit-overview-temp.pug', {'var1': 'bar'})
+    html = pug.render('./unit-overview-temp', {'var1': 'bar'})
     return HttpResponse(html)
 
 def homepage(request):
-    html = pug.render('./homepage.pug', {'var1': 'bar'})
+    html = pug.render('./homepage', {'var1': 'bar'})
     return HttpResponse(html)
 
 
