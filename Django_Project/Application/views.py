@@ -13,6 +13,15 @@ def challenge(request):
     html = pug.render('./lesson-challenge', {'var1': 'bar'})
     return HttpResponse(html)
 
+# unitoverview and homepage added by Ryan
+def unitoverview(request):
+    html = pug.render('./unit-overview.pug', {'var1': 'bar'})
+    return HttpResponse(html)
+
+def homepage(request):
+    html = pug.render('./homepage.pug', {'var1': 'bar'})
+    return HttpResponse(html)
+
 
 #Regular Django Views
 @csrf_exempt
