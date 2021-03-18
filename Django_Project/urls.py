@@ -30,5 +30,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('test', views.test),
     path('challenge', views.challenge),
+    path('homepage', views.homepage),
+    path('unitoverview', view.unitoverview),
     path('', include('Django_Project.Application.urls')),
 ]
