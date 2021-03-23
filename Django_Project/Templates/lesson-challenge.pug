@@ -4,6 +4,8 @@ html
 	head
 		link(rel="stylesheet" href="/static/css/challengestyle.css")
 		link(rel="stylesheet" href="/static/css/w3.css")
+		script(src="/static/js/jquery.min.js")
+		script(src="/static/js/lesson-challenge.js")
 	body
 		style.
 			.breadcrumbs{
@@ -66,12 +68,12 @@ html
 				form(name="code-enter", method="post")
 					div.input
 					//- to make a block of text (or for scripts), put a . at the end
-					textarea(name="code", cols="80", rows="20").
+					textarea(name="code", id="codeArea" cols="80", rows="20").
 						test test, var1 = #{var1}
 			div(id="backtolesson")
 				button(type="button" onclick="alert('Back to Lesson TEMP')") Back to Lesson
 			div(id="submitcode")
-				button(type="button" onclick="alert('Submit Code TEMP')") Submit Code
+				button(type="button" id="btnSubmitCode") Submit Code
 			div(class="hints")
 				div(class="w3-panel w3-card")
 					p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
