@@ -4,29 +4,27 @@ html
 	head
 		link(rel="stylesheet" href="/static/css/challengestyle.css")
 		link(rel="stylesheet" href="/static/css/w3.css")
-style.
-	.breadcrumbs{
-		padding: 10px;
-		font-family: sans-serif;
-	}
-	.breadcrumbs__item{
-		display: inline-block;
-	}
-	.breadcrumbs__item:not(:last-of-type)::after{
-		content: '/';
-		margin: 0 5px;
-	}
-
-// list of pages
-ul.breadcrumbs
-	li.breadcrumbs__item
-		a.breadcrumbs__link(href='/homepage') Home
-	li.breadcrumbs__item
-		a.breadcrumbs__link(href='/unitoverview') Unit 1 Overview
-	li.breadcrumbs__item
-		a.breadcrumbs__link(href='/challenge') Challenge
-
 	body
+		style.
+			.breadcrumbs{
+				padding: 10px;
+				font-family: sans-serif;
+			}
+			.breadcrumbs__item{
+				display: inline-block;
+			}
+			.breadcrumbs__item:not(:last-of-type)::after{
+				content: '/';
+				margin: 0 5px;
+			}
+		// list of pages
+		ul.breadcrumbs
+			li.breadcrumbs__item
+				a.breadcrumbs__link(href='/homepage') Home
+			li.breadcrumbs__item
+				a.breadcrumbs__link(href='/unitoverview') Unit 1 Overview
+			li.breadcrumbs__item
+				a.breadcrumbs__link(href='/challenge') Challenge
 		div(class="lessonTitle")
 			h1 Learn Secure Coding
 			p 
@@ -56,21 +54,20 @@ ul.breadcrumbs
 				script(src="/static/js/gotochallenge.js")
 			div(class="codeEnter")
 				div(class="w3-panel w3-card")
-				//pre
-					//- For block text (or for scripts), put a . after the tag name
-					//code.
-					//	#include &lt;stdio.h&gt;
-					//	int main() {
-					//		 printf() displays the string inside quotation
-					//		printf("Hello, World!");
-					//		return 0;
-					//	}
-
-					form(name="code-enter", method="post")
-						div.input
-						//span.label Code
-						textarea(name="code", cols="80", rows="20")
-
+				//-pre
+					For block text (or for scripts), put a . after the tag name
+					code.
+						#include &lt;stdio.h&gt;
+						int main() {
+							printf() displays the string inside quotation
+							printf("Hello, World!");
+							return 0;
+						}
+				form(name="code-enter", method="post")
+					div.input
+					//- to make a block of text (or for scripts), put a . at the end
+					textarea(name="code", cols="80", rows="20").
+						test test, var1 = #{var1}
 			div(id="backtolesson")
 				button(type="button" onclick="alert('Back to Lesson TEMP')") Back to Lesson
 			div(id="submitcode")
