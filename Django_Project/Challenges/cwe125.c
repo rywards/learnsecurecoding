@@ -12,6 +12,7 @@
  * @param len Length of the array.
  * @param index Index of array to return.
  * */
+/*
 int getValueFromArray(int *array, int len, int index) {
 
 	int value;
@@ -41,6 +42,10 @@ int getValueFromArrayGood(int *array, int len, int index) {
 
 	return value;
 }
+*/
+/* BEGIN USER-SUBMITTED */
+
+/* END USER-SUBMITTED */
 
 // checker function
 int main() {

@@ -1,6 +1,7 @@
 env/
 __pycache__
 db.sqlite3
-challenges/bin
 Django_Project/.env
-challenges/temp
+challenges/bin
+*/Challenges/bin
+*/Challenges/temp
