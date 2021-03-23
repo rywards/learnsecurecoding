@@ -56,15 +56,21 @@ ul.breadcrumbs
 				script(src="/static/js/gotochallenge.js")
 			div(class="codeEnter")
 				div(class="w3-panel w3-card")
-				pre
+				//pre
 					//- For block text (or for scripts), put a . after the tag name
-					code.
-						#include &lt;stdio.h&gt;
-						int main() {
-							// printf() displays the string inside quotation
-							printf("Hello, World!");
-							return 0;
-						}
+					//code.
+					//	#include &lt;stdio.h&gt;
+					//	int main() {
+					//		 printf() displays the string inside quotation
+					//		printf("Hello, World!");
+					//		return 0;
+					//	}
+
+					form(name="code-enter", method="post")
+						div.input
+						//span.label Code
+						textarea(name="code", cols="80", rows="20")
+
 			div(id="backtolesson")
 				button(type="button" onclick="alert('Back to Lesson TEMP')") Back to Lesson
 			div(id="submitcode")
