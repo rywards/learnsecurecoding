@@ -5,6 +5,8 @@ from Django_Project.Application.serializers import UnitSerializer, LessonSeriali
 from Django_Project.Application.serializers import ChallengeSerializer, UsrAnswerSerializer
 import Django_Project.Application.pug as pug
 from rest_framework import generics
+from rest_framework.response import Response
+from rest_framework import status
 
 def test(request):
     html = pug.render('./test.pug', {'var1': 'bar'})
@@ -22,6 +24,47 @@ def unitoverview(request):
 def homepage(request):
     html = pug.render('./homepage', {'var1': 'bar'})
     return HttpResponse(html)
+
+
+
+class LessonPageView(generics.ListCreateAPIView):
+    """
+    Primary class that handles the view of the challenge-lesson page
+    """
+    serializer_class = UsrAnswerSerializer
+    queryset = Lesson.objects.all()
+
+    
+    def list(self, request, *args, **kwargs):
+        template = './lesson-challenge'
+        pk = kwargs['pk']
+        if pk != None:
+            lesson_material = Lesson.objects.get(lessonid=pk).lessonmaterial
+            challenge_code = Challenge.objects.get(lessonid=pk).challengeoverview
+            html = pug.render(template, {'lesson_material': lesson_material,
+                                        'challenge_code': challenge_code,
+                                        'lessonid': pk})
+            
+            return HttpResponse(html)
+    
+
+
+    def create(self, request, *args, **kwargs):
+        data = {}
+        data['answer'] = request.data['code']
+        data['lessonid'] = request.data['lesson_id']
+        data['success_state'] = 0
+        serializer = UsrAnswerSerializer(data = data)
+        if serializer.is_valid(): 
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
+
+    
+
+
+
+
 
 
 #Django class based views using APIView Wrapper class

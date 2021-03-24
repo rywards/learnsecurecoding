@@ -12,11 +12,12 @@ $(function(){
 		var codeAreaContents = codeArea.val();
 		
 		var dataToSubmit = {
-			code: codeAreaContents
+			code: codeAreaContents,
+			lesson_id: lessonid 
 		}
 		
 		//create a POST request to /challenge/submit (https://api.jquery.com/jQuery.post/)
-		$.post('/challenge/submit', dataToSubmit)
+		$.post('/challenges/' + lessonid +'/', dataToSubmit)
 		.then(function(data) {
 			console.log(data);
 		})

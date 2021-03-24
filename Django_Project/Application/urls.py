@@ -8,7 +8,7 @@ urlpatterns = [
     path('lessons/', views.LessonList.as_view()),
     path('lessons/<int:pk>/', views.LessonDetail.as_view()),
     path('challenges/', views.ChallengeList.as_view()),
-    path('challenges/<int:pk>/', views.ChallengeDetail.as_view()),
+    path('challenges/<int:pk>/', views.LessonPageView.as_view()),
     path('user_answers/', views.UsrAnswersList.as_view()),
     path('user_answers/<int:pk>/', views.UsrAnswersDetail.as_view()),
 ]
