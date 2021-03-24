@@ -77,7 +77,7 @@ def joinCodeWithChallenge(fileName, userCode):
 # compile a given source into a given output file
 def compile(filePath, outputPath):
 	
-	child = s.run(['gcc', filePath, '-o', outputPath], capture_output=True, text=True)
+	child = s.run(['gcc', str(filePath), '-o', str(outputPath)], capture_output=True, text=True)
 	out = child.stdout.strip()
 	err = child.stderr.strip()
 	print(out)
@@ -100,7 +100,7 @@ def cwe125_check(tempFile, numAttemptsRemaining):
 	
 	try: 
 		# Sometimes the executable inexplicably crashes. We have to handle that by just catching an error and retrying.
-		results = s.run([tempFile], capture_output=True, text=True)
+		results = s.run([str(tempFile)], capture_output=True, text=True)
 		results_arr = results.stdout.strip().split("\n")
 		has_passed = True
 		fail_reasons = []
