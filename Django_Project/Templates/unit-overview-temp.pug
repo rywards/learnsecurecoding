@@ -1,6 +1,5 @@
-// converted from UnitOverview.html
-html
 head
+  link(rel='stylesheet' href='unitoverview.css')
   title Learn Secure Coding: Unit Overview
   style.
     .breadcrumbs {
@@ -14,18 +13,27 @@ head
     content: '/';
     margin: 0 5px;
     }
+h1
+  em Learn Secure Coding
 ul.breadcrumbs
   li.breadcrumbs__item
     a.breadcrumbs__link(href='/homepage') Home
   li.breadcrumbs__item
-    a.breadcrumbs__link(href='/challenge') Unit 1 Overview
-h1 Unit Overview
-h2  Here is a wonderful description of what the unit will cover. 
-h1 Pick a Lesson
-a(href='/challenge')
-  | Lesson 1
-  br
-a(href='/challenge')
-  | Lesson 2
-  br
-a(href='/challenge')  Lesson n
+    a.breadcrumbs__link(href='/unit-overview-temp') Unit Containing CWE-125
+p.separator
+h2 Out-of-Bounds Reading and Writing
+h5  This unit will cover out-of-bounds reading and writing.
+.container
+  p Language: C
+  p Lessons: 1
+  p Difficulty: 4
+p.lesson_separator
+.lesson_list
+  a(href='/lesson-challenge')
+    | CWE-125: Out-of-bounds Read
+    br
+  p.info1 Information about the lesson
+  a(href='/lesson-challenge')
+    | Lesson 2: Lesson Placeholder
+    br
+  p.info2 Information about second lesson
