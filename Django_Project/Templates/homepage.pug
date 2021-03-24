@@ -1,6 +1,6 @@
-// converted from homepage.html
-html
+// converted from html
 head
+  link(rel='stylesheet' href='/static/css/homepage.css')
   title Learn Secure Coding
   style.
     .breadcrumbs {
@@ -14,10 +14,25 @@ head
     content: '/';
     margin: 0 5px;
     }
-h1 Learn Secure Coding
 ul.breadcrumbs
   li.breadcrumbs__item
-    a.breadcrumbs__link(href='/') Home 
-h2  Welcome to Learn Secure Coding! We&apos;ll have a better introduction soon. 
+    a.breadcrumbs__link(href='/homepage') Home 
+h1
+  em Learn Secure Coding
+p.welcome_text
+  | Aliquam ut enim orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+  | Sed ornare iaculis congue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id velit ex.
+  | Donec et quam quis lacus tristique lacinia. Etiam a blandit libero, vitae tincidunt nulla.
+p.separator
 h1 Pick a Unit
-a(href='/unitoverview')  Unit 1
+.unit_list
+  .CWE_120
+    a(href='/unitoverview')
+      h3 Out of Bounds Reading and Writing
+    p
+      | This lesson is focused on
+      | out of bounds reading and writing.
+  .CWE_20
+    a(href='/unitoverview')
+      h3 Unit Placeholder Link
+    p PLACEHOLDER INFORMATION

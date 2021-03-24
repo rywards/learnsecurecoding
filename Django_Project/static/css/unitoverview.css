@@ -1,0 +1,37 @@
+h1, h2, h5 {
+    text-align: center;
+    font-family: cursive;
+}
+body {
+    background-color: beige;
+}
+p.separator {
+    width: 99%; 
+    margin: 0 auto; 
+    height: 1px; 
+    border-bottom: 2px solid;
+}
+p.lesson_separator {
+    width: 90%; 
+    margin: 0 auto; 
+    height: 1px; 
+    border-bottom: 1px solid;
+}
+
+.container {
+    margin-left: 10%;
+    margin-right: 10%;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.lesson_list {
+    margin-top: 1%;
+    margin-left: 5%;
+}
+
+p.info1, p.info2 {
+    margin-left: 5%;
+    font-weight: bold;
+}
