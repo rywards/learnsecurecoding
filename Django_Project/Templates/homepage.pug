@@ -16,7 +16,7 @@ head
     }
 ul.breadcrumbs
   li.breadcrumbs__item
-    a.breadcrumbs__link(href='/homepage') Home 
+    a.breadcrumbs__link(href='/') Home 
 h1
   em Learn Secure Coding
 p.welcome_text
@@ -27,12 +27,13 @@ p.separator
 h1 Pick a Unit
 .unit_list
   .CWE_120
-    a(href='/unitoverview')
+    a(href='/unit/1/lessons')
       h3 Out of Bounds Reading and Writing
     p
-      | This lesson is focused on
-      | out of bounds reading and writing.
+      | #{unit_1}
   .CWE_20
-    a(href='/unitoverview')
+    a(href='/unit/1/lessons')
       h3 Unit Placeholder Link
     p PLACEHOLDER INFORMATION
+
+
