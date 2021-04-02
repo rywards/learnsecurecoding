@@ -26,10 +26,10 @@ router = routers.DefaultRouter()
 #Wire up our API using automatic URL routing
 #Additionally, we include login URLs for the browsable API. 
 urlpatterns = [
-    path('', views.homepage),
+    path('', views.HomePageView.as_view()),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('test', views.test),
-    path('challenge', views.challenge),
-    path('unitoverview', views.unitoverview),
     path('', include('Django_Project.Application.urls')),
+    path('unit/<int:pk>/lessons/', views.ChooseLessonPageView.as_view()),
+    path('unit/<int:unit_id>/lessons/<int:pk>', views.LessonPageView.as_view()),
+
 ]
