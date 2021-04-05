@@ -34,7 +34,7 @@ class LessonPageView(generics.ListCreateAPIView):
     queryset = Lesson.objects.all()
     template = './lesson-challenge'
 
-    
+    # Handles GET requests
     def list(self, request, *args, **kwargs):
         pk = kwargs['pk']
         unit_id = kwargs['unit_id']
@@ -53,7 +53,7 @@ class LessonPageView(generics.ListCreateAPIView):
         return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
     
 
-
+	# Handles POST requests
     def create(self, request, *args, **kwargs):
         data = {}
         data['answer'] = request.data['code']
