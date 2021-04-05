@@ -10,6 +10,25 @@ tempPath = join(folderPath, 'temp')
 # create tempPath if it does not exist
 if not os.path.exists(tempPath): os.makedirs(tempPath)
 
+# This is the "main" function that takes user code, join/compile/runs it, and returns the response to the user (in HTML format).
+def RunChecker(fileKey, userCode, thisTitle, nextTitle):
+	
+	has_passed, fail_reasons = JoinCompileAndRun(fileKey, userCode)
+	
+	if (has_passed):
+		message = '<p class="lessonchallenge-congrats">Congratulations!</p>' + \
+			'<p>You have completed the challenge for ' + thisTitle + '. ' + \
+			'Click "proceed" to move on to ' + nextTitle + '.</p>'
+	else:
+		failMessage = ''
+		for reason in fail_reasons:
+			failMessage += ' - ' + str(reason) + '<br>'
+		message = '<p class="lessonchallenge-sorry">Sorry, you did not successfully complete the challenge.</p>' + \
+			'<p>Fail reason:</p>' + \
+			'<pre>' + failMessage + '</pre>'
+	
+	return has_passed, message
+
 # This is the function that joins the user code with the challenge code, compiles it, and runs it.
 def JoinCompileAndRun(fileName, userCode):
 	
@@ -50,7 +69,9 @@ def JoinCompileAndRun(fileName, userCode):
 	else:
 		#todo: implement failed compilation
 		print('Did not successfully compile')
-		fail_reasons.append('Did not successfully compile.')
+		fail_reasons.append('Did not successfully compile:')
+		for reason in compileFailReasons:
+			fail_reasons.append(reason)
 		
 	# and delete source+executable when done
 	delete(srcCodePath)
@@ -96,7 +117,7 @@ def cwe125_check(tempFile, numAttemptsRemaining):
 	'''
 	Checks to see if user passed cwe125 challenge based off of output.
 	'''
-	if (numAttemptsRemaining < 0): return False, ['Failed to Execute Binary']
+	if (numAttemptsRemaining < 0): return False, ['Failed to Execute Binary (NOTE: This occasionally happens when the runtime environment detects an invalid behavior from the executable, such as an out-of-bounds read. You can try again, but your solution was most likely not complete.)']
 	
 	try: 
 		# Sometimes the executable inexplicably crashes. We have to handle that by just catching an error and retrying.
@@ -132,8 +153,8 @@ if __name__ == '__main__':
 	testUserCode3 = "int getValueFromArray(int *array, int len, int index) {int value;if (index < len && index >= 0) {value = array[index];}else {value = -1;}return value;}"
 
 	#test run these three binaries
-	JoinCompileAndRun('cwe125', testUserCode1)
-	JoinCompileAndRun('cwe125', testUserCode2)
-	JoinCompileAndRun('cwe125', testUserCode3)
+	print(RunChecker('cwe125', testUserCode1, 'title1', 'title2'))
+	print(RunChecker('cwe125', testUserCode2, 'title1', 'title2'))
+	print(RunChecker('cwe125', testUserCode3, 'title1', 'title2'))
 
 

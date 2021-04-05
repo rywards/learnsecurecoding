@@ -84,8 +84,8 @@ int main() {
 	
 	//print out whether pass or fail
 	printf("Regular (Expected) Values: %s\n", checkExpectedValues ? "PASS" : "FAIL");
-	printf("Negative Values: %s\n", checkNegativeValues ? "PASS" : "FAIL");
-	printf("Greater Values: %s\n", checkGreaterValues ? "PASS" : "FAIL");
+	printf("Requesting Negative Values: %s\n", checkNegativeValues ? "PASS" : "FAIL");
+	printf("Requesting Greater Values than Maximum: %s\n", checkGreaterValues ? "PASS" : "FAIL");
 	
 	return 0;
 }
