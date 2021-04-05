@@ -6,6 +6,6 @@ $(function(){
     btnUnit.on('click', function() {
         console.log('Unit button was clicked');
         
-        window.location.href = '/unit/' + unit_id + "/lessons/"
+        window.location.href = '/unit/' + unit_id + "/lessons"
     })
 })

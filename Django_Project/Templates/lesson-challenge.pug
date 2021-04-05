@@ -9,10 +9,12 @@ html
 		script(src="/static/js/go_to_unit.js")
 		script(src="/static/js/scroll_to_lesson.js")
 		script(src="/static/js/scroll_to_challenge.js")
+		script(src="/static/js/reset_challenge.js")
 	body
 		script.
 			var lesson_id =  #{lesson_id}
 			var unit_id = #{unit_id}
+			var challenge_id = #{challenge_id}
 		style.
 			.breadcrumbs{
 				padding: 10px;
@@ -69,6 +71,8 @@ html
 				button(type="button", id="btnUnit") Back To Unit
 			div(id='scrollToLesson')
 				button(type = "button", id= "btnScrollLesson") Scroll to Lesson
+			div(id='resetChallenge')
+				button(type = "button", id = "btnReset") Reset Challenge
 			div(class="hints")
 				div(class="w3-panel w3-card")
 					p Lorem ipsum dolor sit amet, consectetur adipiscing elit.

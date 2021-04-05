@@ -17,7 +17,7 @@ $(function(){
 		}
 		
 		//create a POST request to /challenge/submit (https://api.jquery.com/jQuery.post/)
-		$.post('/unit/'+ unit_id + '/lessons/' + lesson_id +'', dataToSubmit)
+		$.post('/unit/'+ unit_id + '/lessons/' + lesson_id +'/' , dataToSubmit)
 		.then(function(data) {
 			console.log(data);
 		})
