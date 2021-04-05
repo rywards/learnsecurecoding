@@ -6,6 +6,9 @@ html
 		link(rel="stylesheet" href="/static/css/w3.css")
 		script(src="/static/js/jquery.min.js")
 		script(src="/static/js/lesson-challenge.js")
+		script(src="/static/js/go_to_unit.js")
+		script(src="/static/js/scroll_to_lesson.js")
+		script(src="/static/js/scroll_to_challenge.js")
 	body
 		script.
 			var lesson_id =  #{lesson_id}
@@ -30,7 +33,7 @@ html
 				a.breadcrumbs__link(href='/unit/#{unit_id}/lessons') Unit 1 Overview
 			li.breadcrumbs__item
 				a.breadcrumbs__link(href='/unit/#{unit_id}/lessons/#{lesson_id}') Challenge
-		div(class="lessonTitle")
+		div(class="lessonTitle", id="lessonTitle")
 			h1 Learn Secure Coding
 			p 
 		p 
@@ -42,13 +45,8 @@ html
 				p
 					p #{lesson_material}
 			div(class="gotochallengebutton")
-				div(id="js_button_function")
-				//- Load React. Taken from tutorial page
-				//- Note: when deploying, replace "development.js" with "production.min.js".
-				script(src="https://unpkg.com/react@17/umd/react.development.js" crossorigin)
-				script(src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin)
-				//- Load our React component.
-				script(src="/static/js/gotochallenge.js")
+				div(id="scrollToChallenge")
+					button(type="button", id = "btnScrollChallenge") Scroll to Challenge
 			div(class="codeEnter")
 				div(class="w3-panel w3-card")
 				//-pre
@@ -65,10 +63,12 @@ html
 					//- to make a block of text (or for scripts), put a . at the end
 					textarea(name="code", id="codeArea" cols="80", rows="20").
 						#{challenge_code}
-			div(id="backtolesson")
-				button(type="button" onclick="alert('Back to Lesson TEMP')") Back to Lesson
 			div(id="submitcode")
 				button(type="button" id="btnSubmitCode") Submit Code
+			div(id="backtounit")
+				button(type="button", id="btnUnit") Back To Unit
+			div(id='scrollToLesson')
+				button(type = "button", id= "btnScrollLesson") Scroll to Lesson
 			div(class="hints")
 				div(class="w3-panel w3-card")
 					p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
