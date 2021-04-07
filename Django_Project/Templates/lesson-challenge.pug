@@ -6,6 +6,10 @@ html
 		link(rel="stylesheet" href="/static/css/w3.css")
 		script(src="/static/js/jquery.min.js")
 		script(src="/static/js/lesson-challenge.js")
+		script(src = "/static/codemirror/codemirror-5.60.0/lib/codemirror.js")
+		link(rel="stylesheet" href="/static/codemirror/codemirror-5.60.0/lib/codemirror.css")
+		script(src="/static/codemirror/codemirror-5.60.0/mode/clike/clike.js" rel="stylesheet") 
+		link(rel="stylesheet" href="/static/codemirror/codemirror-5.60.0/theme/dracula.css")
 	body
 		script.
 			var lesson_id =  #{lesson_id}
@@ -59,8 +63,16 @@ html
 				form(name="code-enter", method="post")
 					div.input
 					//- to make a block of text (or for scripts), put a . at the end
-					textarea(name="code", id="codeArea" cols="80", rows="20").
+					textarea(name="code", id="codeArea", cols="750", rows="650").
 						#{challenge_code}
+					script.
+						var editor = CodeMirror.fromTextArea
+						(document.getElementById('codeArea'),{
+							mode: "clike",
+							theme: "dracula",
+							lineNumbers: true
+						});
+						editor.setSize("750","550");
 			div(id="submitcode")
 				button(type="button" id="btnSubmitCode") Submit Code
 			div(id="backtounit")
