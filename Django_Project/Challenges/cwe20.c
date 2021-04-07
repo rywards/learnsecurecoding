@@ -23,7 +23,28 @@
     Write a function that checks values input into the array.
 */
 
+/* BEGIN USER-SUBMITTED */
+
+/* END USER-SUBMITTED */
+
 /********************WORKING FUNCTION********************/
+
+bool checkInputCOMPARE(int *inputToCheck, int index) {
+    // Checks array input
+    // if function returns false in any case
+    // should be fixed to completely stop on invalid input, or go back around.
+    bool isChecked;
+
+    if ((inputToCheck[index] <= MAX_VAL) & (inputToCheck[index] >= MIN_VAL)) {
+        isChecked = true;
+    }
+    else {
+    
+        isChecked = false;
+    }
+
+    return isChecked;
+}
 /*
 bool checkInput(int *inputToCheck, int index) {
     // Checks array input
@@ -35,6 +56,7 @@ bool checkInput(int *inputToCheck, int index) {
         isChecked = true;
     }
     else {
+    
         isChecked = false;
     }
 
@@ -56,29 +78,38 @@ bool checkInputBAD(int *inputToCheck, int index) {
 
     return isChecked;
 }
-
 */
 
-/* BEGIN USER-SUBMITTED */
-
-/* END USER-SUBMITTED */
 
 int main() {
 
     
     int i, inputparams[ARR_SIZE], randInput;
-    bool passBounds;
+    bool didPass, passBounds[ARR_SIZE], matchResult[ARR_SIZE];
     srand(time(NULL));
 
     for (int i = 0; i < ARR_SIZE; i++) {
         
         randInput = (rand() % HIGH_RANGE - MAX_VAL);
         printf("Input param %d: %d\n", (i+1), inputparams[i] = randInput);
-        passBounds = checkInput(inputparams, i);
-        printf("Result %d: %s\n", i+1, passBounds ? "PASS" : "FAIL");
 
+        matchResult[i] = checkInputCOMPARE(inputparams, i);
+        passBounds[i] = checkInput(inputparams, i);
+        printf("Correct Result: %d\n", matchResult[i]);
+        printf("User Result: %d\n", passBounds[i]);
+        
     }
 
+    for (int i = 0; i < ARR_SIZE; i++) {
+        if (passBounds[i] == matchResult[i]) {
+            didPass = true;
+        }
+        else {
+            didPass = false;
+            break;
+        }
+    }
+    printf("Were all values checked: %s\n",  didPass ? "PASS" : "FAIL");
     return 0;
     
 }

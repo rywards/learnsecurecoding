@@ -120,7 +120,7 @@ def compile(filePath, outputPath):
 
 def cwe_check(tempFile, numAttemptsRemaining):
 	'''
-	Checks to see if user passed cwe125 challenge based off of output.
+	Checks to see if user passed cwe125/cwe20 challenge based off of output.
 	'''
 	if (numAttemptsRemaining < 0): return False, ['Failed to Execute Binary (NOTE: This occasionally happens when the runtime environment detects an invalid behavior from the executable, such as an out-of-bounds read. You can try again, but your solution was most likely not complete.)']
 	
@@ -159,7 +159,7 @@ if __name__ == '__main__':
 	testUserCode3 = "int getValueFromArray(int *array, int len, int index) {int value;if (index < len && index >= 0) {value = array[index];}else {value = -1;}return value;}"
 
 	cwe20_test = "bool checkInput(int *inputToCheck, int index) {bool isChecked; if ((inputToCheck[index] <= MAX_VAL) & (inputToCheck[index] >= MIN_VAL)) {isChecked = true;}else {isChecked = false;}return isChecked;}"
-
+	cwe20_testBAD = "bool checkInput(int *inputToCheck, int index) {bool isChecked; if ((inputToCheck[index] <= MAX_VAL)) {isChecked = true;}else {isChecked = false;}return isChecked;}"
 
 	#test run these three (now four) binaries
 	print(RunChecker('cwe125', testUserCode1, 'title1', 'title2'))
@@ -167,6 +167,7 @@ if __name__ == '__main__':
 	print(RunChecker('cwe125', testUserCode3, 'title1', 'title2'))
 
 	print(RunChecker('cwe20', cwe20_test, 'title1', 'title2'))
+	print(RunChecker('cwe20', cwe20_testBAD, 'title1','title2'))
 	
 
 
