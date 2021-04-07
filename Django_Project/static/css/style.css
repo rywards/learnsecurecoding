@@ -1,6 +1,3 @@
-a {
-    color: inherit;
-}
 h1 {
     text-align: center;
     font-size: 200%;
@@ -31,8 +28,11 @@ title {
 }
 
 .animate{transition: 0.25s ease-in-out;}
+.animate-background{transition: background 0.25s ease-in-out;}
 .clickable{cursor: pointer;}
 .no-underline{text-decoration: none;}
+hr{border-color: rgb(110, 110, 110);}
+p.indent{text-indent: 30px;}
 
 .CWE_120, .CWE_20 {
     background-color: white;
@@ -46,4 +46,29 @@ title {
 }
 .CWE_120:hover, .CWE_20:hover {
     background-color: lightgray;
+}
+
+p.lesson_separator {
+    width: 90%; 
+    margin: 0 auto; 
+    height: 1px; 
+    border-bottom: 1px solid;
+}
+
+.container {
+    margin-left: 10%;
+    margin-right: 10%;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.lesson_list {
+    margin-top: 1%;
+    margin-left: 5%;
+}
+
+p.info1, p.info2 {
+    margin-left: 5%;
+    font-weight: bold;
 }

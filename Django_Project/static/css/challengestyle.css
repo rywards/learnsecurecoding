@@ -2,16 +2,6 @@ body {
     background-color: beige;
 }
 
-/* styles */
-.lessonTitle {
-    font-family: cursive;
-    text-align: center;
-    border-style: solid;
-    border-top: 0px;
-    border-left: 0px;
-    border-right: 0px;
-
-}
 .challengeBox {
     text-align: left;
     

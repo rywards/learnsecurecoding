@@ -4,6 +4,7 @@ html
 	head
 		link(rel="stylesheet" href="/static/css/challengestyle.css")
 		link(rel="stylesheet" href="/static/css/w3.css")
+		link(rel="stylesheet" href="/static/css/style.css")
 		script(src="/static/js/jquery.min.js")
 		script(src="/static/js/lesson-challenge.js")
 		script(src = "/static/codemirror/codemirror-5.60.0/lib/codemirror.js")
@@ -27,52 +28,52 @@ html
 				content: '/';
 				margin: 0 5px;
 			}
-		// list of pages
-		ul.breadcrumbs
-			li.breadcrumbs__item
-				a.breadcrumbs__link(href='/') Home
-			li.breadcrumbs__item
-				a.breadcrumbs__link(href='/unit/#{unit_id}/lessons') Unit 1 Overview
-			li.breadcrumbs__item
-				a.breadcrumbs__link(href='/unit/#{unit_id}/lessons/#{lesson_id}') Challenge
-		div(class="lessonTitle", id="lessonTitle")
-			h1 Learn Secure Coding
-			p 
+		.w3-auto
+			h1 
+				em Learn Secure Coding
+			// list of pages
+			ul.breadcrumbs
+				li.breadcrumbs__item
+					a.breadcrumbs__link(href='/') Home
+				li.breadcrumbs__item
+					a.breadcrumbs__link(href='/unit/#{unit_id}/lessons') Unit 1 Overview
+				li.breadcrumbs__item
+					a.breadcrumbs__link(href='/unit/#{unit_id}/lessons/#{lesson_id}') Challenge
 		p 
 		div(class="w3-container")
 			div(class="challengeBox")
-				div(class="w3-panel w3-card")
-				h3 
-					em Lesson: foo bar
-				p
-					p #{lesson_material}
-			div(class="gotochallengebutton")
-				div(id="scrollToChallenge")
-					button(type="button", id = "btnScrollChallenge") Scroll to Challenge
+				div(class="w3-panel w3-card w3-white w3-padding-16")
+					h3 
+						em Lesson: foo bar
+					p
+						p #{lesson_material}
+					div(class="gotochallengebutton")
+						div(id="scrollToChallenge")
+							button(type="button", id = "btnScrollChallenge") Scroll to Challenge
 			div(class="codeEnter", id="codeEnter")
-				div(class="w3-panel w3-card")
-				//-pre
-					For block text (or for scripts), put a . after the tag name
-					code.
-						#include &lt;stdio.h&gt;
-						int main() {
-							printf() displays the string inside quotation
-							printf("Hello, World!");
-							return 0;
-						}
-				form(name="code-enter", method="post")
-					div.input
-					//- to make a block of text (or for scripts), put a . at the end
-					textarea(name="code", id="codeArea", cols="750", rows="650").
-						#{challenge_code}
-					script.
-						var editor = CodeMirror.fromTextArea
-						(document.getElementById('codeArea'),{
-							mode: "clike",
-							theme: "dracula",
-							lineNumbers: true
-						});
-						editor.setSize("750","550");
+				div(class="w3-card")
+					//-pre
+						For block text (or for scripts), put a . after the tag name
+						code.
+							#include &lt;stdio.h&gt;
+							int main() {
+								printf() displays the string inside quotation
+								printf("Hello, World!");
+								return 0;
+							}
+					form(name="code-enter", method="post")
+						div.input
+						//- to make a block of text (or for scripts), put a . at the end
+						textarea(name="code", id="codeArea", cols="750", rows="650").
+							#{challenge_code}
+						script.
+							var editor = CodeMirror.fromTextArea
+							(document.getElementById('codeArea'),{
+								mode: "clike",
+								theme: "dracula",
+								lineNumbers: true
+							});
+							editor.setSize("750","550");
 			div(id="submitcode")
 				button(type="button" id="btnSubmitCode") Submit Code
 			div(id="backtounit")
