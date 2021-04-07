@@ -2,7 +2,6 @@ $(function(){
 	
 	//query the page for element with id "btnSubmitCode" (among others)
 	var btnSubmit = $('#btnSubmitCode');
-	var codeArea = $('#codeArea');
     var codeAreaClass = $('#codeEnter');
 	
 	//add an event handler for the button
@@ -10,7 +9,7 @@ $(function(){
 		console.log('I was clicked!');
 		
 		//contents of the code area
-		var codeAreaContents = codeArea.val();
+		var codeAreaContents = editor.getValue(); 
 		
 		var dataToSubmit = {
 			code: codeAreaContents,
@@ -48,7 +47,6 @@ $(function(){
 
 
     var btnReset = $('#btnReset');
-    var codeArea = $('#codeArea');
 
     btnReset.on('click', function(){
 
@@ -57,7 +55,7 @@ $(function(){
             method: "GET",
             dataType: 'json',
             success: function(response){
-                codeArea.val(response['challengeoverview']);
+                editor.getDoc().setValue(response['challengeoverview'])
             }
         });
     })
@@ -70,7 +68,7 @@ $(function(){
 
     btnScrollDown.on('click', function(){
         console.log('I was clicked');
-        document.getElementById("codeArea").scrollIntoView({behavior: "smooth"}); 
+        document.getElementById("codeEnter").scrollIntoView({behavior: "smooth"}); 
 
     })
 })
