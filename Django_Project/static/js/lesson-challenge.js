@@ -3,6 +3,7 @@ $(function(){
 	//query the page for element with id "btnSubmitCode" (among others)
 	var btnSubmit = $('#btnSubmitCode');
 	var codeArea = $('#codeArea');
+    var codeAreaClass = $('#codeEnter');
 	
 	//add an event handler for the button
 	btnSubmit.on('click', function() {
@@ -20,6 +21,8 @@ $(function(){
 		$.post('/unit/'+ unit_id + '/lessons/' + lesson_id +'/' , dataToSubmit)
 		.then(function(data) {
 			console.log(data);
+            codeAreaClass.append(data['message'])
+
 		})
 		.fail(function(err) {
 			console.log(err);

@@ -7,6 +7,7 @@ import Django_Project.Application.pug as pug
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
+from Django_Project.Application.cwe_checker import RunChecker
 
 def test(request):
     html = pug.render('./test.pug', {'var1': 'bar'})
@@ -53,16 +54,36 @@ class LessonPageView(generics.ListCreateAPIView):
         return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
     
 
-	# Handles POST requests
+    # Handles POST requests
     def create(self, request, *args, **kwargs):
+        
+        answer = request.data['code']
+        lesson_id = request.data['lesson_id']
+        file_key = Challenge.objects.get(lessonid=lesson_id).filekey
+        lesson_title = Lesson.objects.get(lessonid=lesson_id).lessontitle
+        
+        next_id = str(int(lesson_id) + 1)
+        next_title = ''
+        try:
+            next_title = Lesson.objects.get(lessonid = next_id).lessontitle
+        except Exception as e:
+            print(e)
+
+        success_state, message = RunChecker(file_key, answer, lesson_title, next_title)
+            
+
         data = {}
-        data['answer'] = request.data['code']
-        data['lessonid'] = request.data['lesson_id']
-        data['success_state'] = 0
+        data['answer'] = answer
+        data['lessonID'] = lesson_id
+        data['success_state'] = 1 if success_state else 0
         serializer = UsrAnswerSerializer(data = data)
         if serializer.is_valid(): 
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            copy_data = serializer.data
+            copy_data['message'] = message
+            return Response(copy_data, status=status.HTTP_201_CREATED)
+        else:
+            print(serializer.errors)
         return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
 
 
@@ -75,16 +96,19 @@ class HomePageView(generics.ListAPIView):
     template = "./homepage"
 
     """
-    This method is used to make our dictionary of variables to pass to pug.render
-    Each key in the dictionary will be 'unit_' + the units id
-    Each value will be the unitoverview associated with that unit
+    This method is used to make our dictionary of variables to pass to pug.render.
+    keys in the dictionary with the form <'unit_' + the units id> will have a value of the unit overview.
+    keys in the dictionary with the form <'unit_' + the units id + '_title'> will have a value of the title of the Unit.
     """
     def make_unit_dictionary(self):
         dictionary = {}
         var_base_name = 'unit_'
+        title_var_ending = '_title'
         current_queryset = self.get_queryset()
         for unit in current_queryset:
             dictionary[var_base_name + unit.unitid] = unit.unitoverview
+            dictionary[var_base_name + unit.unitid + title_var_ending] = unit.unittitle
+
 
         return dictionary
 
@@ -106,16 +130,18 @@ class ChooseLessonPageView(generics.ListAPIView):
 
 
     """
-    This method is used to make our dictionary of variables to pass to pug.render
-    Each key in the dictionary will be 'lesson_' + the lesson's id
-    Each value will be the lesson material associated with that lesson
+    This method is used to make our dictionary of variables to pass to pug.render.
+    keys in the dictionary with the form <'lesson_' + the lessons id> will have a value of the lesson description.
+    keys in the dictionary with the form <'lesson_' + the lessons id + '_title'> will have a value of the title of the lesson.
     """
     def make_lesson_dictionary(self, unitid):
         dictionary = {}
         var_base_name = 'lesson_'
+        title_var_ending = '_title'
         current_queryset = self.get_queryset().filter(unitid=unitid)
         for lesson in current_queryset:
-            dictionary[var_base_name + lesson.lessonid] = lesson.lessonmaterial
+            dictionary[var_base_name + lesson.lessonid] = lesson.lessondescription
+            dictionary[var_base_name + lesson.lessonid + title_var_ending] = lesson.lessontitle
 
         return dictionary
 
