@@ -43,7 +43,6 @@ def JoinCompileAndRun(fileName, userCode):
 	# path for compiled executable (gcc on windows automatically adds .exe, so we need to account for that)
 	executablePath = join(tempPath, fileKey)
 	executablePathWin = join(tempPath, fileKey + '.exe')
-	
 	# Open source file, write the code to it, and close it
 	srcCodeFile = open(srcCodePath, 'w+')
 	srcCodeFile.write(finalCode)
@@ -60,9 +59,15 @@ def JoinCompileAndRun(fileName, userCode):
 	if didCompile == True:
 		# Run checker for cwe125
 		if (fileName == 'cwe125'):
-			has_passed, fail_reasons = cwe125_check(executablePath, 1)
+			has_passed, fail_reasons = cwe_check(executablePath, 1)
 			print(has_passed)
 			print(fail_reasons)
+		# cwe20 checker
+		if (fileName == 'cwe20'):
+			has_passed, fail_reasons = cwe_check(executablePath, 1)
+			print(has_passed)
+			print(fail_reasons)
+
 		else:
 			print('No other challenges yet supported.')
 			fail_reasons.append('No other challenges yet supported.')
@@ -113,7 +118,7 @@ def compile(filePath, outputPath):
 	
 	return has_passed, fail_reasons
 
-def cwe125_check(tempFile, numAttemptsRemaining):
+def cwe_check(tempFile, numAttemptsRemaining):
 	'''
 	Checks to see if user passed cwe125 challenge based off of output.
 	'''
@@ -138,7 +143,8 @@ def cwe125_check(tempFile, numAttemptsRemaining):
 	except:
 		# if failed to run executable, try again
 		print('Failed to run executable. ' + str(numAttemptsRemaining) + ' attempts remaining.')
-		return cwe125_check(tempFile, numAttemptsRemaining - 1)
+		return cwe_check(tempFile, numAttemptsRemaining - 1)
+
 
 # little method to delete files
 def delete(filePath):
@@ -152,9 +158,15 @@ if __name__ == '__main__':
 	testUserCode2 = "int getValueFromArray(int *array, int len, int index) {return 0;}"
 	testUserCode3 = "int getValueFromArray(int *array, int len, int index) {int value;if (index < len && index >= 0) {value = array[index];}else {value = -1;}return value;}"
 
-	#test run these three binaries
+	cwe20_test = "bool checkInput(int *inputToCheck, int index) {bool isChecked; if ((inputToCheck[index] <= MAX_VAL) & (inputToCheck[index] >= MIN_VAL)) {isChecked = true;}else {isChecked = false;}return isChecked;}"
+
+
+	#test run these three (now four) binaries
 	print(RunChecker('cwe125', testUserCode1, 'title1', 'title2'))
 	print(RunChecker('cwe125', testUserCode2, 'title1', 'title2'))
 	print(RunChecker('cwe125', testUserCode3, 'title1', 'title2'))
+
+	print(RunChecker('cwe20', cwe20_test, 'title1', 'title2'))
+	
 
 
