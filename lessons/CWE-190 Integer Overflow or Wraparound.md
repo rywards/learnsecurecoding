@@ -24,9 +24,21 @@ When computers count in binary, they follow a simple pattern. The least signific
 001 = 1
 ```
 
-This is known as an _integer overflow_. When an integer is incremented greater than its maximum value, it "wraps around" to its minimum possible value.
+This is known as an _integer overflow_, also known as a _wraparound_. When an integer is incremented greater than its maximum value, it "wraps around" to its minimum possible value. Likewise, if an integer is decremented to less than its minimum value, it wraps back to its maximum possible value. 
 
-This also occurs for signed integers. If a programmer is not careful to make sure their 
+This also occurs for signed integers. If a programmer is not careful to make sure their integers do not go past their maximum/minimum values, they [may suddenly find that their train ride has nine quintillion stops remaining](https://youtu.be/48QQXpbTlVM).
+
+A similar event occurs with signed integers. Note in the following example, with a 4-bit signed integer, that the computer follows the aforementioned simple pattern as it counts up, causing the integer's value to wrap back to its minimum value.
+
+```verilog
+0101 =  5
+0110 =  6
+0111 =  7
+1000 = -8
+1001 = -7
+1010 = -6
+1011 = -5
+```
 
 
 Need To Rewrite: Early in most coders careers they are taught about the primitive data types of the language that they are using. This often includes characters, Strings, and Integers. On top of those many popular languages like Java include the Long which function similarly to Integers but can be twice as long.  
