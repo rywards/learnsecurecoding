@@ -7,8 +7,10 @@ join = PurePath.joinpath
 folderPath = join(Path(__file__).resolve().parent.parent, 'Challenges')
 tempPath = join(folderPath, 'temp')
 
+# WIP regex: /(int getValueFromArray\([^\(\)]*\))\s*\{([^{}]*(\{[^{}]*\})[^{}]*)*}/gs
+
 # create tempPath if it does not exist
-if not os.path.exists(tempPath): os.makedirs(tempPath)
+#if not os.path.exists(tempPath): os.makedirs(tempPath)
 
 # This is the "main" function that takes user code, join/compile/runs it, and returns the response to the user (in HTML format).
 def RunChecker(fileKey, userCode, thisTitle, nextTitle):
@@ -57,17 +59,21 @@ def JoinCompileAndRun(fileName, userCode):
 	
 	# run checker if the compilation succeeded
 	if didCompile == True:
+		# Run checker for cwe131
+		if (fileName == 'cwe131'):
+			has_passed, fail_reasons = cwe131_check(executablePath)
+			print(has_passed)
+			print(fail_reasons)
 		# Run checker for cwe125
-		if (fileName == 'cwe125'):
+		elif (fileName == 'cwe125'):
 			has_passed, fail_reasons = cwe_check(executablePath, 1)
 			print(has_passed)
 			print(fail_reasons)
 		# cwe20 checker
-		if (fileName == 'cwe20'):
+		elif (fileName == 'cwe20'):
 			has_passed, fail_reasons = cwe_check(executablePath, 1)
 			print(has_passed)
 			print(fail_reasons)
-
 		else:
 			print('No other challenges yet supported.')
 			fail_reasons.append('No other challenges yet supported.')
@@ -112,7 +118,7 @@ def compile(filePath, outputPath):
 	has_passed = True
 	fail_reasons = []
 	
-	if (err):
+	if (err and not os.path.isfile(outputPath)):
 		has_passed = False
 		fail_reasons.append('Failed to compile') # TODO: add more info
 	
@@ -145,6 +151,42 @@ def cwe_check(tempFile, numAttemptsRemaining):
 		print('Failed to run executable. ' + str(numAttemptsRemaining) + ' attempts remaining.')
 		return cwe_check(tempFile, numAttemptsRemaining - 1)
 
+def cwe131_check(tempFile):
+	
+	has_passed = True
+	fail_reasons = []
+	
+	try:
+		results = s.run(['valgrind', '--leak-check=yes', str(tempFile)], capture_output=True, text=True)
+		results_arr = results.stdout.strip().split("\n")
+		err_arr = results.stderr.strip().split("\n")
+		for line in err_arr:
+			if ("Invalid read" in line):
+				has_passed = False
+				fail_reasons.append("Invalid read") # TODO: rewrite message
+				print(line)
+				break
+			elif ("Invalid write" in line):
+				has_passed = False
+				fail_reasons.append("Invalid write") # TODO: rewrite message
+				print(line)
+				break
+		
+		for result in results_arr:
+			# Making the assumption that we will always be following a "<test component>: <Pass or fail>" format
+			# for reporting results. If we don't do that, this method won't work for all cwe challenges.
+			print(result)
+			if (": " in result and result.split(": ")[1] == "FAIL"):
+				has_passed = False
+				fail_reasons.append(result)
+	except Exception as e:
+		print(e)
+		print('Failed to run.')
+		has_passed = False
+		fail_reasons = ['Failed to Execute Binary']
+	
+	
+	return has_passed, fail_reasons
 
 # little method to delete files
 def delete(filePath):
@@ -160,14 +202,17 @@ if __name__ == '__main__':
 
 	cwe20_test = "bool checkInput(int *inputToCheck, int index) {bool isChecked; if ((inputToCheck[index] <= MAX_VAL) & (inputToCheck[index] >= MIN_VAL)) {isChecked = true;}else {isChecked = false;}return isChecked;}"
 	cwe20_testBAD = "bool checkInput(int *inputToCheck, int index) {bool isChecked; if ((inputToCheck[index] <= MAX_VAL)) {isChecked = true;}else {isChecked = false;}return isChecked;}"
-
-	#test run these three (now four) binaries
-	print(RunChecker('cwe125', testUserCode1, 'title1', 'title2'))
-	print(RunChecker('cwe125', testUserCode2, 'title1', 'title2'))
-	print(RunChecker('cwe125', testUserCode3, 'title1', 'title2'))
-
-	print(RunChecker('cwe20', cwe20_test, 'title1', 'title2'))
-	print(RunChecker('cwe20', cwe20_testBAD, 'title1','title2'))
 	
+	cwe131_test1 = "int *makeList() {int *list;list = (int*) malloc(2*sizeof(int));list[0] = VALUE_1;list[1] = VALUE_2;list[2] = VALUE_3;list[3] = VALUE_4;return list;}"
+	cwe131_test2 = "int *makeList() {int *list;list = (int*) malloc(5*sizeof(int));list[0] = VALUE_1;list[1] = VALUE_2;list[2] = VALUE_3;list[3] = VALUE_4;return list;}"
+	#test run these three (now four) binaries
+	# print(RunChecker('cwe125', testUserCode1, 'title1', 'title2'))
+	# print(RunChecker('cwe125', testUserCode2, 'title1', 'title2'))
+	# print(RunChecker('cwe125', testUserCode3, 'title1', 'title2'))
+
+	# print(RunChecker('cwe20', cwe20_test, 'title1', 'title2'))
+	# print(RunChecker('cwe20', cwe20_testBAD, 'title1','title2'))
+	print(RunChecker('cwe131', cwe131_test1, 'title1', 'title2'))
+	print(RunChecker('cwe131', cwe131_test2, 'title1', 'title2'))
 
 
