@@ -74,6 +74,10 @@ def JoinCompileAndRun(fileName, userCode):
 			has_passed, fail_reasons = cwe_check(executablePath, 1)
 			print(has_passed)
 			print(fail_reasons)
+		if fileName == 'cwe787':
+			has_passed, fail_reasons = cwe_check(executablePath, 1)
+			print(has_passed)
+			print(fail_reasons)
 		else:
 			print('No other challenges yet supported.')
 			fail_reasons.append('No other challenges yet supported.')
@@ -205,6 +209,16 @@ if __name__ == '__main__':
 	
 	cwe131_test1 = "int *makeList() {int *list;list = (int*) malloc(2*sizeof(int));list[0] = VALUE_1;list[1] = VALUE_2;list[2] = VALUE_3;list[3] = VALUE_4;return list;}"
 	cwe131_test2 = "int *makeList() {int *list;list = (int*) malloc(5*sizeof(int));list[0] = VALUE_1;list[1] = VALUE_2;list[2] = VALUE_3;list[3] = VALUE_4;return list;}"
+
+
+	cwe_787_test_good = "int setValueInArray(int *array, int len, int val, int index) {if(index < 0 || index >= len){return -1;} int oldVal = array[index]; array[index] = val; return oldVal; }"
+	# fails due to accepting negative indices
+	cwe_787_test_bad_neg = "int setValueInArray(int *array, int len, int val, int index) {if(index >= len){return -1;} int oldVal = array[index]; array[index] = val; return oldVal; }"
+	# fails due to accepting indices greater than length of array
+	cwe_787_test_bad_gre = "int setValueInArray(int *array, int len, int val, int index) {if(index < 0){return -1;} int oldVal = array[index]; array[index] = val; return oldVal; }"
+
+
+
 	#test run these three (now four) binaries
 	# print(RunChecker('cwe125', testUserCode1, 'title1', 'title2'))
 	# print(RunChecker('cwe125', testUserCode2, 'title1', 'title2'))
@@ -214,5 +228,9 @@ if __name__ == '__main__':
 	# print(RunChecker('cwe20', cwe20_testBAD, 'title1','title2'))
 	print(RunChecker('cwe131', cwe131_test1, 'title1', 'title2'))
 	print(RunChecker('cwe131', cwe131_test2, 'title1', 'title2'))
+
+	print(RunChecker('cwe787', cwe_787_test_good, 'title1', 'title2'))
+	print(RunChecker('cwe787', cwe_787_test_bad_neg, 'title1', 'title2'))
+	print(RunChecker('cwe787', cwe_787_test_bad_gre, 'title1', 'title2'))
 
 
