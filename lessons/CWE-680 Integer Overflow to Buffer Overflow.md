@@ -11,3 +11,15 @@ A memory buffer overflow refers to a vulnerability that takes advantage of of a 
 **How does an Integer Overflow lead to a Buffer Overflow**
 
 If the programs position in the memory buffer is determined by an integer, and the bounds of that integer are not checked, this could mean an integer overflow would cascade into a buffer overflow. For example, lets say you are iterating through a portion of a memory buffer using a for loop with a counter. Lets also say that counter is an integer named i. If the bounds of i are not checked, this could lead to the program writing outside the intended portion of a memory buffer, should i unexpectedly overflow or wraparound. If this happens it can lead to any of the potential outcomes outlined above for buffer overflow.
+
+**Example**
+
+The following example is an example in c from https://cwe.mitre.org/data/definitions/190.html, and illustrates an integer overflow to buffer overflow.
+
+nresp = packet_get_int();
+if (nresp > 0) {
+response = xmalloc(nresp*sizeof(char*));
+for (i = 0; i < nresp; i++) response[i] = packet_get_string(NULL);
+}
+
+If nresp has the value 1073741824 and sizeof(char*) has its typical value of 4, then the result of the operation nresp*sizeof(char*) overflows, and the argument to xmalloc() will be 0. Most malloc() implementations will happily allocate a 0-byte buffer, causing the subsequent loop iterations to overflow the heap buffer response.
