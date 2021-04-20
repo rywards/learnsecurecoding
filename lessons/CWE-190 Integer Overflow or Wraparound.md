@@ -8,7 +8,7 @@ The value an integer can store is dependent on the number of bits it contains, a
 
 Some programmers may be familiar with how to count in binary. Below is an example of all possible values a 3-bit unsigned integer can have, by counting up from 0 to 7.
 
-```verilog
+```java
 000 = 0
 001 = 1
 010 = 2
@@ -23,7 +23,7 @@ Some programmers may be familiar with how to count in binary. Below is an exampl
 
 When computers count in binary, they follow a simple pattern. The least significant bit (LSB) flips from 1 to 0 and back every number, and subsequent bits only flip if all bits to the right are 1. So what will a computer do after all bits are 1? It flips to all zeros.
 
-```verilog
+```java
 110 = 6
 111 = 7
 000 = 0
@@ -34,9 +34,9 @@ This is known as an _integer overflow_, also known as a _wraparound_. When an in
 
 This also occurs for signed integers. If a programmer is not careful to make sure their integers do not go past their maximum/minimum values, they [may suddenly find that their train ride has nine quintillion stops remaining](https://youtu.be/48QQXpbTlVM).
 
-A similar event occurs with signed integers. Note in the following example, with a 4-bit signed integer, that the computer follows the aforementioned simple pattern as it counts up, causing the integer's value to wrap back to its minimum value.
+A similar event occurs with signed integers. Note in the following example, with a 4-bit signed integer, that the computer follows the aforementioned simple pattern as it counts up, causing the integer\'s value to wrap back to its minimum value.
 
-```verilog
+```java
 0101 =  5
 0110 =  6
 0111 =  7
