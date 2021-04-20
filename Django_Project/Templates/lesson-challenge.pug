@@ -5,6 +5,7 @@ html
 		link(rel="stylesheet" href="/static/css/challengestyle.css")
 		link(rel="stylesheet" href="/static/css/w3.css")
 		link(rel="stylesheet" href="/static/css/style.css")
+		link(rel="stylesheet" href="/static/css/codehighlight.css")
 		script(src="/static/js/jquery.min.js")
 		script(src="/static/js/lesson-challenge.js")
 		script(src = "/static/codemirror/codemirror-5.60.0/lib/codemirror.js")
@@ -46,7 +47,7 @@ html
 					h3 
 						em Lesson: foo bar
 					p
-						p #{lesson_material}
+						p!=lesson_material
 					div(class="gotochallengebutton")
 						div(id="scrollToChallenge")
 							button(type="button", id = "btnScrollChallenge") Scroll to Challenge
