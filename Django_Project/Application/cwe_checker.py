@@ -171,12 +171,12 @@ def cwe131_check(tempFile):
 		for line in err_arr:
 			if ("Invalid read" in line):
 				has_passed = False
-				fail_reasons.append("Invalid read") # TODO: rewrite message
+				fail_reasons.append("Invalid read detected: Checker is reading memory outside of what is allocated for the array.") 
 				print(line)
 				break
 			elif ("Invalid write" in line):
 				has_passed = False
-				fail_reasons.append("Invalid write") # TODO: rewrite message
+				fail_reasons.append("Invalid write detected. Function is writing values to memory outside of what's allocated for the array.") 
 				print(line)
 				break
 		
