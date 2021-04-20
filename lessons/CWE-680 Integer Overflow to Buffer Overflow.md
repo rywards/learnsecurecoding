@@ -14,7 +14,7 @@ If the programs position in the memory buffer is determined by an integer, and t
 
 **Example**
 
-The following example is an example in c from https://cwe.mitre.org/data/definitions/190.html, and illustrates an integer overflow to buffer overflow.
+The following example is in c from https://cwe.mitre.org/data/definitions/190.html, and illustrates an integer overflow to buffer overflow.
 ```c
 nresp = packet_get_int();
 if (nrest > 0)
