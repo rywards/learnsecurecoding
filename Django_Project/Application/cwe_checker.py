@@ -74,7 +74,11 @@ def JoinCompileAndRun(fileName, userCode):
 			has_passed, fail_reasons = cwe_check(executablePath, 1)
 			print(has_passed)
 			print(fail_reasons)
-		if fileName == 'cwe787':
+		elif (fileName == 'cwe787'):
+			has_passed, fail_reasons = cwe_check(executablePath, 1)
+			print(has_passed)
+			print(fail_reasons)
+		elif (fileName == 'cwe190'):
 			has_passed, fail_reasons = cwe_check(executablePath, 1)
 			print(has_passed)
 			print(fail_reasons)
@@ -217,20 +221,25 @@ if __name__ == '__main__':
 	# fails due to accepting indices greater than length of array
 	cwe_787_test_bad_gre = "int setValueInArray(int *array, int len, int val, int index) {if(index < 0){return -1;} int oldVal = array[index]; array[index] = val; return oldVal; }"
 
+	cwe190_testGOOD = "int checkOverflow(short int *overflowItemsCheck) {short int i = 0; int total = 0; while (i < (sizeof(overflowItemsCheck)-1)) {total = total + overflowItemsCheck[i];i++;} return total; }"
+	cwe190_testBAD = "int checkOverflow(short int *overflowItemsCheck) {short int i = 0; short int total = 0; while (i < (sizeof(overflowItemsCheck)-1)) {total = total + overflowItemsCheck[i];i++;} return total; }"
 
 
-	#test run these three (now four) binaries
+	#test run these three (now blah blah number) binaries
 	# print(RunChecker('cwe125', testUserCode1, 'title1', 'title2'))
 	# print(RunChecker('cwe125', testUserCode2, 'title1', 'title2'))
 	# print(RunChecker('cwe125', testUserCode3, 'title1', 'title2'))
 
 	# print(RunChecker('cwe20', cwe20_test, 'title1', 'title2'))
 	# print(RunChecker('cwe20', cwe20_testBAD, 'title1','title2'))
-	print(RunChecker('cwe131', cwe131_test1, 'title1', 'title2'))
-	print(RunChecker('cwe131', cwe131_test2, 'title1', 'title2'))
+	#print(RunChecker('cwe131', cwe131_test1, 'title1', 'title2'))
+	#print(RunChecker('cwe131', cwe131_test2, 'title1', 'title2'))
 
-	print(RunChecker('cwe787', cwe_787_test_good, 'title1', 'title2'))
-	print(RunChecker('cwe787', cwe_787_test_bad_neg, 'title1', 'title2'))
-	print(RunChecker('cwe787', cwe_787_test_bad_gre, 'title1', 'title2'))
+	#print(RunChecker('cwe787', cwe_787_test_good, 'title1', 'title2'))
+	#print(RunChecker('cwe787', cwe_787_test_bad_neg, 'title1', 'title2'))
+	#print(RunChecker('cwe787', cwe_787_test_bad_gre, 'title1', 'title2'))
+
+	print(RunChecker('cwe190', cwe190_testBAD,'title1','title2'))
+	print(RunChecker('cwe190', cwe190_testGOOD,'title1','title2'))
 
 
