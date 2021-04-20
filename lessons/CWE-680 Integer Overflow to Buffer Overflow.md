@@ -17,9 +17,10 @@ If the programs position in the memory buffer is determined by an integer, and t
 The following example is an example in c from https://cwe.mitre.org/data/definitions/190.html, and illustrates an integer overflow to buffer overflow.
 
 nresp = packet_get_int();
-if (nresp > 0) {
-response = xmalloc(nresp*sizeof(char*));
-for (i = 0; i < nresp; i++) response[i] = packet_get_string(NULL);
+if (nresp > 0) 
+{
+  response = xmalloc(nresp*sizeof(char*));
+  for (i = 0; i < nresp; i++) response[i] = packet_get_string(NULL);
 }
 
 If nresp has the value 1073741824 and sizeof(char*) has its typical value of 4, then the result of the operation nresp*sizeof(char*) overflows, and the argument to xmalloc() will be 0. Most malloc() implementations will happily allocate a 0-byte buffer, causing the subsequent loop iterations to overflow the heap buffer response.
