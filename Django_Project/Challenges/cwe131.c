@@ -6,7 +6,6 @@
 #define VALUE_2 531999
 #define VALUE_3 5251994
 #define VALUE_4 12345
-#define NUM_ITEMS 23;
 
 /*
     CWE-131 
