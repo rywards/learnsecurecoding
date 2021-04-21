@@ -83,15 +83,11 @@ def JoinCompileAndRun(fileName, userCode):
 			has_passed, fail_reasons = cwe_check(executablePath, 1)
 			print(has_passed)
 			print(fail_reasons)
-<<<<<<< HEAD
-		elif fileName == 'cwe787':
-=======
 		elif (fileName == 'cwe787'):
 			has_passed, fail_reasons = cwe_check(executablePath, 1)
 			print(has_passed)
 			print(fail_reasons)
 		elif (fileName == 'cwe190'):
->>>>>>> efd67e5e6da87bc01e5a03c6ed98d22a4ac84a1d
 			has_passed, fail_reasons = cwe_check(executablePath, 1)
 			print(has_passed)
 			print(fail_reasons)
