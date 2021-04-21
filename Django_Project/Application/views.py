@@ -43,7 +43,9 @@ class LessonPageView(generics.ListCreateAPIView):
 		pk = kwargs['pk']
 		unit_id = kwargs['unit_id']
 		if pk != None and unit_id != None:
-			lesson_material = Lesson.objects.get(lessonid=pk).lessonmaterial
+			lesson  = Lesson.objects.get(lessonid=pk)
+			lesson_material = lesson.lessonmaterial
+			lesson_title = lesson.lessontitle
 			challenge = Challenge.objects.get(lessonid=pk)
 			challenge_code = challenge.challengeoverview
 			challenge_id = challenge.challengeid
@@ -51,7 +53,8 @@ class LessonPageView(generics.ListCreateAPIView):
 										'challenge_code': challenge_code,
 										'lesson_id': pk,
 										'unit_id':unit_id,
-										'challenge_id': challenge_id})
+										'challenge_id': challenge_id,
+										'lesson_title': lesson_title})
 			
 			return HttpResponse(html)
 		return Response("Error", status= status.HTTP_400_BAD_REQUEST)
