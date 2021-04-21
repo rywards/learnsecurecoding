@@ -1,6 +1,6 @@
 **Lesson Outline**
 
-This lesson builds upon the concepts for two seperate CWE's. CWE-190: Integer overflow or wraparound, which has already been covered in this unit and CWE-119: Improper Restriction of Operations within the Bounds of a Memory Buffer (informally called buffer overflow). This lesson will provide some information on what a buffer overflow is, and outline some of the causes and effects of an integer overflow to bufffer overflow.
+This lesson builds upon the concepts for two seperate CWEs. CWE-190: Integer overflow or wraparound, which has already been covered in this unit and CWE-119: Improper Restriction of Operations within the Bounds of a Memory Buffer (informally called buffer overflow). This lesson will provide some information on what a buffer overflow is, and outline some of the causes and effects of an integer overflow to bufffer overflow.
 
 **What is a Buffer Overflow**
 

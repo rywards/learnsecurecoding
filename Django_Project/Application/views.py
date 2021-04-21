@@ -54,7 +54,7 @@ class LessonPageView(generics.ListCreateAPIView):
 										'challenge_id': challenge_id})
 			
 			return HttpResponse(html)
-		return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
+		return Response("Error", status= status.HTTP_400_BAD_REQUEST)
 	
 
 	# Handles POST requests
@@ -136,15 +136,23 @@ class ChooseLessonPageView(generics.ListAPIView):
 	This method is used to make our dictionary of variables to pass to pug.render.
 	keys in the dictionary with the form <'lesson_' + the lessons id> will have a value of the lesson description.
 	keys in the dictionary with the form <'lesson_' + the lessons id + '_title'> will have a value of the title of the lesson.
+	Also adds a variable for how many lessons are in the unit
 	"""
 	def make_lesson_dictionary(self, unitid):
 		dictionary = {}
 		var_base_name = 'lesson_'
 		title_var_ending = '_title'
 		current_queryset = self.get_queryset().filter(unitid=unitid)
+		descriptions = []
+		titles = []
 		for lesson in current_queryset:
-			dictionary[var_base_name + lesson.lessonid] = lesson.lessondescription
-			dictionary[var_base_name + lesson.lessonid + title_var_ending] = lesson.lessontitle
+			descriptions.append(lesson.lessondescription)
+			titles.append(lesson.lessontitle)
+
+
+		dictionary['descriptions'] = descriptions
+		dictionary['titles'] = titles
+		dictionary['numLessons'] = len(current_queryset)
 
 		return dictionary
 
@@ -161,7 +169,7 @@ class ChooseLessonPageView(generics.ListAPIView):
 			html = pug.render(self.template, vars = vars)
 			return HttpResponse(html)
 
-		return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
+		return Response("Error", status= status.HTTP_400_BAD_REQUEST)
 			
 			
 			
