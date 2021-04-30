@@ -97,7 +97,7 @@ def JoinCompileAndRun(fileName, userCode):
 			print(has_passed)
 			print(fail_reasons)
 		elif (fileName == 'cwe680'):
-			has_passed, fail_reasons = cwe_check_valgrind(executablePath)
+			has_passed, fail_reasons = cwe_check(executablePath, 1)
 			print(has_passed)
 			print(fail_reasons)
 		else:
