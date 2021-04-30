@@ -11,7 +11,12 @@ tempPath = join(folderPath, 'temp')
 # WIP regex: /(int getValueFromArray\([^\(\)]*\))\s*\{([^{}]*(\{[^{}]*\})[^{}]*)*}/gs
 
 matchRegexes = {
-	'cwe125': [re.compile('(int getValueFromArray\([^\(\)]*\))\s*\{([^{}]*(\{[^{}]*\})*[^{}]*)*}', re.DOTALL)]
+	'cwe125': [re.compile('(int getValueFromArray\([^\(\)]*\))\s*\{([^{}]*(\{[^{}]*\})*[^{}]*)*}', re.DOTALL)],
+	'cwe20': None,
+	'cwe131': None,
+	'cwe190': None,
+	'cwe680': None,
+	'cwe787': None,
 }
 
 # create tempPath if it does not exist
