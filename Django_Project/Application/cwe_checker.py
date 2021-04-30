@@ -82,6 +82,10 @@ def JoinCompileAndRun(fileName, userCode):
 			has_passed, fail_reasons = cwe_check(executablePath, 1)
 			print(has_passed)
 			print(fail_reasons)
+		elif (fileName == 'cwe680'):
+			has_passed, fail_reasons = cwe_check(executablePath, 1)
+			print(has_passed)
+			print(fail_reasons)
 		else:
 			print('No other challenges yet supported.')
 			fail_reasons.append('No other challenges yet supported.')
@@ -159,7 +163,7 @@ def cwe_check(tempFile, numAttemptsRemaining):
 		print('Failed to run executable. ' + str(numAttemptsRemaining) + ' attempts remaining.')
 		return cwe_check(tempFile, numAttemptsRemaining - 1)
 
-def cwe131_check(tempFile):
+def cwe_memory_check(tempFile):
 	
 	has_passed = True
 	fail_reasons = []
@@ -224,7 +228,8 @@ if __name__ == '__main__':
 	cwe190_testGOOD = "int checkOverflow(short int *overflowItemsCheck) {short int i = 0; int total = 0; while (i < (sizeof(overflowItemsCheck)-1)) {total = total + overflowItemsCheck[i];i++;} return total; }"
 	cwe190_testBAD = "int checkOverflow(short int *overflowItemsCheck) {short int i = 0; short int total = 0; while (i < (sizeof(overflowItemsCheck)-1)) {total = total + overflowItemsCheck[i];i++;} return total; }"
 
-
+	cwe680_testGOOD = "int buffOverflow(){ int *buffer; short int memToAllocate = 32766; buffer = (int*) malloc(memToAllocate); free(buffer); return memToAllocate;}"
+	cwe680_testBAD = "int buffOverflow(){ int *buffer; short int memToAllocate = 32766; memToAllocate += 5; buffer = (int*) malloc(memToAllocate); free(buffer); return memToAllocate;}"
 	#test run these three (now blah blah number) binaries
 	# print(RunChecker('cwe125', testUserCode1, 'title1', 'title2'))
 	# print(RunChecker('cwe125', testUserCode2, 'title1', 'title2'))
@@ -239,7 +244,10 @@ if __name__ == '__main__':
 	#print(RunChecker('cwe787', cwe_787_test_bad_neg, 'title1', 'title2'))
 	#print(RunChecker('cwe787', cwe_787_test_bad_gre, 'title1', 'title2'))
 
-	print(RunChecker('cwe190', cwe190_testBAD,'title1','title2'))
-	print(RunChecker('cwe190', cwe190_testGOOD,'title1','title2'))
+	#print(RunChecker('cwe190', cwe190_testBAD,'title1','title2'))
+	#print(RunChecker('cwe190', cwe190_testGOOD,'title1','title2'))
+
+	#print(RunChecker('cwe680', cwe680_testGOOD, 'title1', 'title2'))
+	#print(RunChecker('cwe680', cwe680_testBAD, 'title1', 'title2'))
 
 
