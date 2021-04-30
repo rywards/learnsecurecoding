@@ -2,12 +2,17 @@ import subprocess as s
 from datetime import datetime as date
 from pathlib import Path, PurePath
 import os
+import regex as re
 join = PurePath.joinpath
 
 folderPath = join(Path(__file__).resolve().parent.parent, 'Challenges')
 tempPath = join(folderPath, 'temp')
 
 # WIP regex: /(int getValueFromArray\([^\(\)]*\))\s*\{([^{}]*(\{[^{}]*\})[^{}]*)*}/gs
+
+matchRegexes = {
+	'cwe125': [re.compile('(int getValueFromArray\([^\(\)]*\))\s*\{([^{}]*(\{[^{}]*\})*[^{}]*)*}', re.DOTALL)]
+}
 
 # create tempPath if it does not exist
 #if not os.path.exists(tempPath): os.makedirs(tempPath)
@@ -34,7 +39,11 @@ def RunChecker(fileKey, userCode, thisTitle, nextTitle):
 # This is the function that joins the user code with the challenge code, compiles it, and runs it.
 def JoinCompileAndRun(fileName, userCode):
 	
-	finalCode = joinCodeWithChallenge(fileName, userCode)
+	finalCode, joinFailReasons = joinCodeWithChallenge(fileName, userCode)
+	
+	# if the code join failed, return the failure
+	if len(joinFailReasons) > 0:
+		return False, joinFailReasons
 	
 	# create a file key from the exact current time
 	now = date.now()
@@ -61,12 +70,12 @@ def JoinCompileAndRun(fileName, userCode):
 	if didCompile == True:
 		# Run checker for cwe131
 		if (fileName == 'cwe131'):
-			has_passed, fail_reasons = cwe131_check(executablePath)
+			has_passed, fail_reasons = cwe_check_valgrind(executablePath)
 			print(has_passed)
 			print(fail_reasons)
 		# Run checker for cwe125
 		elif (fileName == 'cwe125'):
-			has_passed, fail_reasons = cwe_check(executablePath, 1)
+			has_passed, fail_reasons = cwe_check_valgrind(executablePath)
 			print(has_passed)
 			print(fail_reasons)
 		# cwe20 checker
@@ -83,7 +92,7 @@ def JoinCompileAndRun(fileName, userCode):
 			print(has_passed)
 			print(fail_reasons)
 		elif (fileName == 'cwe680'):
-			has_passed, fail_reasons = cwe_check(executablePath, 1)
+			has_passed, fail_reasons = cwe_check_valgrind(executablePath, 1)
 			print(has_passed)
 			print(fail_reasons)
 		else:
@@ -97,7 +106,7 @@ def JoinCompileAndRun(fileName, userCode):
 			fail_reasons.append(reason)
 		
 	# and delete source+executable when done
-	delete(srcCodePath)
+	#delete(srcCodePath)
 	delete(executablePath)
 	delete(executablePathWin)
 	
@@ -109,6 +118,32 @@ def joinCodeWithChallenge(fileName, userCode):
 	sourcePath = join(folderPath, fileName + '.c')
 	source = open(sourcePath).read()
 	
+	print(fileName)
+	
+	userCodeArr = []
+	fail_reasons = []
+	finalCode = ""
+	
+	#go through each match regex and add to the user code
+	theseMatchRegexes = matchRegexes[fileName]
+	if theseMatchRegexes:
+		for regex in theseMatchRegexes:
+			match = regex.findall(userCode)
+			print(match)
+			#append the matched code to the userCodeArr
+			if len(match) > 0:
+				for snippet in match:
+					userCodeArr.append(snippet)
+			else:
+				fail_reasons = ['Your submitted code does not quite match what we\'re expecting. Try going back to the original.']
+	# if no regexes, just output the code
+	else:
+		userCodeArr = userCode
+	
+	# join userCodeArr by linebreaks
+	for snippet in userCodeArr:
+		finalCode += str(snippet) + '\n\n'
+	
 	# get the index of the "begin" statement (and add its length to get where it ends)
 	startIdx = source.index('/* BEGIN USER-SUBMITTED */\n') + 27 
 	endIdx = len(source)
@@ -116,7 +151,7 @@ def joinCodeWithChallenge(fileName, userCode):
 	# join the code
 	finalCode = source[0:startIdx] + userCode + source[startIdx:endIdx]
 	
-	return finalCode
+	return finalCode, fail_reasons
 
 # compile a given source into a given output file
 def compile(filePath, outputPath):
@@ -128,7 +163,7 @@ def compile(filePath, outputPath):
 	print(err)
 	
 	has_passed = True
-	fail_reasons = []
+	fail_reasons = [] 
 	
 	if (err and not os.path.isfile(outputPath)):
 		has_passed = False
@@ -163,7 +198,7 @@ def cwe_check(tempFile, numAttemptsRemaining):
 		print('Failed to run executable. ' + str(numAttemptsRemaining) + ' attempts remaining.')
 		return cwe_check(tempFile, numAttemptsRemaining - 1)
 
-def cwe_memory_check(tempFile):
+def cwe_check_valgrind(tempFile):
 	
 	has_passed = True
 	fail_reasons = []
