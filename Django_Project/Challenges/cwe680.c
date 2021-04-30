@@ -71,7 +71,6 @@ int main() {
     buffOverflow();
     for (int i = 0; i < ARR_SIZE; i++){
         if (seedArr[i] == compArr[i]) {
-            //printf("Result set %d ------\nYour result: %d\nCorrect result: %d\n", i, compArr[i], seedArr[i]);
             didPass = true;
         }
         else {
