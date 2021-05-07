@@ -11,7 +11,12 @@ tempPath = join(folderPath, 'temp')
 # WIP regex: /(int getValueFromArray\([^\(\)]*\))\s*\{([^{}]*(\{[^{}]*\})[^{}]*)*}/gs
 
 matchRegexes = {
-	'cwe125': [re.compile('(int getValueFromArray\([^\(\)]*\))\s*\{([^{}]*(\{[^{}]*\})*[^{}]*)*}', re.DOTALL)]
+	'cwe125': [re.compile('(int getValueFromArray\([^\(\)]*\))\s*\{([^{}]*(\{[^{}]*\})*[^{}]*)*}', re.DOTALL)],
+	'cwe20': None,
+	'cwe131': None,
+	'cwe190': None,
+	'cwe680': None,
+	'cwe787': None,
 }
 
 # create tempPath if it does not exist
@@ -88,6 +93,10 @@ def JoinCompileAndRun(fileName, userCode):
 			print(has_passed)
 			print(fail_reasons)
 		elif (fileName == 'cwe190'):
+			has_passed, fail_reasons = cwe_check(executablePath, 1)
+			print(has_passed)
+			print(fail_reasons)
+		elif (fileName == 'cwe680'):
 			has_passed, fail_reasons = cwe_check(executablePath, 1)
 			print(has_passed)
 			print(fail_reasons)
@@ -259,7 +268,8 @@ if __name__ == '__main__':
 	cwe190_testGOOD = "int checkOverflow(short int *overflowItemsCheck) {short int i = 0; int total = 0; while (i < (sizeof(overflowItemsCheck)-1)) {total = total + overflowItemsCheck[i];i++;} return total; }"
 	cwe190_testBAD = "int checkOverflow(short int *overflowItemsCheck) {short int i = 0; short int total = 0; while (i < (sizeof(overflowItemsCheck)-1)) {total = total + overflowItemsCheck[i];i++;} return total; }"
 
-
+	cwe680_testGOOD = "int buffOverflow(){ int *buffer; short int memToAllocate = 32766; buffer = (int*) malloc(memToAllocate); free(buffer); return memToAllocate;}"
+	cwe680_testBAD = "int buffOverflow(){ int *buffer; short int memToAllocate = 32766; memToAllocate += 5; buffer = (int*) malloc(memToAllocate); free(buffer); return memToAllocate;}"
 	#test run these three (now blah blah number) binaries
 	# print(RunChecker('cwe125', testUserCode1, 'title1', 'title2'))
 	# print(RunChecker('cwe125', testUserCode2, 'title1', 'title2'))
@@ -274,7 +284,10 @@ if __name__ == '__main__':
 	#print(RunChecker('cwe787', cwe_787_test_bad_neg, 'title1', 'title2'))
 	#print(RunChecker('cwe787', cwe_787_test_bad_gre, 'title1', 'title2'))
 
-	print(RunChecker('cwe190', cwe190_testBAD,'title1','title2'))
-	print(RunChecker('cwe190', cwe190_testGOOD,'title1','title2'))
+	#print(RunChecker('cwe190', cwe190_testBAD,'title1','title2'))
+	#print(RunChecker('cwe190', cwe190_testGOOD,'title1','title2'))
+
+	#print(RunChecker('cwe680', cwe680_testGOOD, 'title1', 'title2'))
+	#print(RunChecker('cwe680', cwe680_testBAD, 'title1', 'title2'))
 
 

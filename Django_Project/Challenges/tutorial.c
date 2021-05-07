@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdbool.h> 
+#include <time.h>
+#include <stdlib.h>
+
+/*
+    Tutorial Challenge
+    Simple "Hello, World" challenge for the user
+    to familiarize themself with submitting code
+    through the in-site IDE.
+*/
+
+/* BEGIN USER-SUBMITTED */
+
+/* END USER-SUBMITTED */
+
+/*
+ // Method that is trying to allocate 3 int items.
+    char *hello() {
+        char str[12] = // Make a 'Hello, World' string here.
+        return str;
+}
+
+
+*/
+// Checker
+int main() {
+
+    char *userValues = hello();
+	
+    // Check if returned array has the NULL pointer in the correct location
+    bool hasHello;
+    if(strcmp("Hello, World", userValues) == 0){
+            hasHello = true;
+    } else{
+        hasHello = false;
+    }
+	
+    printf("Has expected return value: %s\n", hasHello ? "PASS" : "FAIL");
+	
+	//free(userValues);
+	
+    return 0;
+}
