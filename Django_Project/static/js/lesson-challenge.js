@@ -22,7 +22,7 @@ $(function(){
             document.getElementById("response_text").innerHTML = data['message'];
 
             if (data["success_state"] == 1){
-		var btnProceed = $('#btnProceed');
+		        var btnProceed = $('#btnProceed');
                 btnProceed.prop("disabled",false);
             }
 
