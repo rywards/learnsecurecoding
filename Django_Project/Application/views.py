@@ -43,7 +43,8 @@ class LessonPageView(generics.ListCreateAPIView):
 		pk = kwargs['pk']
 		unit_id = kwargs['unit_id']
 		if pk != None and unit_id != None:
-			lesson  = Lesson.objects.get(lessonid=pk)
+			lesson = Lesson.objects.get(lessonid = pk)
+			numLessons = len(self.get_queryset())
 			lesson_material = lesson.lessonmaterial
 			lesson_title = lesson.lessontitle
 			challenge = Challenge.objects.get(lessonid=pk)
@@ -54,7 +55,8 @@ class LessonPageView(generics.ListCreateAPIView):
 										'lesson_id': pk,
 										'unit_id':unit_id,
 										'challenge_id': challenge_id,
-										'lesson_title': lesson_title})
+										'lesson_title': lesson_title,
+										'num_Lessons': numLessons})
 			
 			return HttpResponse(html)
 		return Response("Error", status= status.HTTP_400_BAD_REQUEST)
@@ -143,8 +145,6 @@ class ChooseLessonPageView(generics.ListAPIView):
 	"""
 	def make_lesson_dictionary(self, unitid):
 		dictionary = {}
-		var_base_name = 'lesson_'
-		title_var_ending = '_title'
 		current_queryset = self.get_queryset().filter(unitid=unitid)
 		descriptions = []
 		titles = []

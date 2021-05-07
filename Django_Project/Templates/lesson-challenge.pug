@@ -14,9 +14,11 @@ html
 		link(rel="stylesheet" href="/static/codemirror/codemirror-5.60.0/theme/dracula.css")
 	body
 		script.
+			//variables used in .js script
 			var lesson_id =  #{lesson_id}
 			var unit_id = #{unit_id}
 			var challenge_id = #{challenge_id}
+			var num_Lessons = #{num_Lessons}
 		style.
 			.breadcrumbs{
 				padding: 10px;
@@ -43,7 +45,7 @@ html
 		p 
 		div(class="w3-container")
 			div(class="challengeBox")
-				div(class="w3-panel w3-card w3-white w3-padding-16")
+				div(class="w3-panel w3-card w3-white w3-padding-16", id = "lessonTitle")
 					h3 
 						em Lesson: #{lesson_title}
 					p
@@ -85,6 +87,6 @@ html
 				button(type = "button", id = "btnReset") Reset Challenge
 			div(class="hints")
 				div(class="w3-panel w3-card")
-					p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+					p(id="response_text") Response and hints will appear here
 					div(id="proceed")
-						button(type="button" onclick="alert('Proceed TEMP')") Proceed
+						button(type="button",id = "btnProceed", disabled = "true") Proceed

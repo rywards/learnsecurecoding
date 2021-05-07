@@ -2,7 +2,6 @@ $(function(){
 	
 	//query the page for element with id "btnSubmitCode" (among others)
 	var btnSubmit = $('#btnSubmitCode');
-    var codeAreaClass = $('#codeEnter');
 	
 	//add an event handler for the button
 	btnSubmit.on('click', function() {
@@ -20,7 +19,12 @@ $(function(){
 		$.post('/unit/'+ unit_id + '/lessons/' + lesson_id +'/' , dataToSubmit)
 		.then(function(data) {
 			console.log(data);
-            codeAreaClass.append(data['message'])
+            document.getElementById("response_text").innerHTML = data['message'];
+
+            if (data["success_state"] == 1){
+                $('#btnProceed').disabled = "false";
+            }
+
 
 		})
 		.fail(function(err) {
@@ -29,7 +33,7 @@ $(function(){
 	})
 })
 
-//This script is meant to be used by a button in order to 
+//This function is meant to be used by a button in order to 
 //go back to the unit-overview page from the lesson-challenge page 
 $(function(){
     var btnUnit = $("#btnUnit");
@@ -41,7 +45,7 @@ $(function(){
     })
 })
 
-//This script is meant to be used by a button on the lesson-challenge page
+//This function is meant to be used by a button on the lesson-challenge page
 //in order to reset the challenge for that given lesson. 
 $(function(){
 
@@ -61,7 +65,7 @@ $(function(){
     })
 })
 
-//This script is meant to be used by a button in order to 
+//This function is meant to be used by a button in order to 
 //scroll down to the challenge on the lesson-challenge page. 
 $(function(){
     var btnScrollDown = $('#btnScrollChallenge');
@@ -73,7 +77,7 @@ $(function(){
     })
 })
 
-//This script is meant to be used by a button in order to 
+//This function is meant to be used by a button in order to 
 //scroll up to the lesson on the lesson-challenged page
 $(function(){
     var btnScrollUp = $('#btnScrollLesson');
@@ -81,6 +85,30 @@ $(function(){
     btnScrollUp.on('click', function(){
         console.log('I was clicked');
         document.getElementById("lessonTitle").scrollIntoView({behavior: "smooth"}); 
+
+    })
+})
+
+
+//This function is meant to be used by a button in order to
+//take the user to the next lesson after completing the current lesson
+$(function(){
+
+    var btnProceed = $('#btnProceed');
+    
+    btnProceed.on('click', function(){
+        const url_begin = "http://"
+        var url_additive = ''; 
+
+        if(lesson_id < num_Lessons){
+            url_additive = '/unit/'+ unit_id + '/lessons/' + (lesson_id + 1) +'/'
+        }
+
+        var current_url = $(location).attr("href");
+        var index_of_slash = current_url.indexOf('/', url_begin.length); 
+        var base_url = (index_of_slash == - 1) ? current_url : current_url.slice(0, index_of_slash);
+
+        window.location.assign(base_url.concat(url_additive));
 
     })
 })
