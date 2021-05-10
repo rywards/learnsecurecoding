@@ -40,3 +40,5 @@ showWidgets(WidgetList);
 ``` 
 
 WidgetList is allocated memory based off of the number of widgets and size of the widget, and at first glance appears to be allocating enough memory to hold all of the widgets. A closer look, however, shows that it fails to take into account the memory needed to store a NULL pointer. As a result, the buffer is smaller than it needs to be, and this will result in buffer overflow. 
+
+For more examples of this weakness and further information visit: <https://cwe.mitre.org/data/definitions/131.html>

@@ -49,6 +49,6 @@ We hope you found this informative!
 
 
 
-
+For more examples of this weakness and further information visit: <https://cwe.mitre.org/data/definitions/787.html>
 
 

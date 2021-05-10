@@ -117,7 +117,7 @@ def JoinCompileAndRun(fileName, userCode):
 			fail_reasons.append(reason)
 		
 	# and delete source+executable when done
-	#delete(srcCodePath)
+	delete(srcCodePath)
 	delete(executablePath)
 	delete(executablePathWin)
 	

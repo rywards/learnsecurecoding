@@ -55,3 +55,6 @@ There is an apocryphal story about the coding of Civilization 2 that attributes 
 ## How do I prevent it?
 
 While there is not one definitive way to prevent integer overflows and wraparounds, it is not too complex to spot and fix them, as long as you are careful to watch out for it. When writing your code, take into consideration how big your integers can get. Be mindful of the range of values that the datatypes can have. For example, if your `int`s can have values in the billions, consider using a `long` instead, as the maximum value of a signed `int` is 2.147 billion. If your numbers approach the limit of a `long`, and precision is not an issue, consider using floating point numbers instead.
+
+
+For more examples of this weakness and further information visit: <https://cwe.mitre.org/data/definitions/190.html>
