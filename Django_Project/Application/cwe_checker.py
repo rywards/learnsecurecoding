@@ -17,6 +17,7 @@ matchRegexes = {
 	'cwe190': None,
 	'cwe680': None,
 	'cwe787': None,
+	'tutorial': None
 }
 
 # create tempPath if it does not exist
@@ -100,6 +101,11 @@ def JoinCompileAndRun(fileName, userCode):
 			has_passed, fail_reasons = cwe_check(executablePath, 1)
 			print(has_passed)
 			print(fail_reasons)
+		elif (fileName == 'tutorial'):
+			has_passed, fail_reasons = cwe_check(executablePath, 1)
+			print(has_passed)
+			print(fail_reasons)
+
 		else:
 			print('No other challenges yet supported.')
 			fail_reasons.append('No other challenges yet supported.')

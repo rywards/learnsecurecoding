@@ -2,6 +2,7 @@
 #include <stdbool.h> 
 #include <time.h>
 #include <stdlib.h>
+#include <string.h>
 
 /*
     Tutorial Challenge
@@ -17,7 +18,7 @@
 /*
  // Method that is trying to allocate 3 int items.
     char *hello() {
-        char str[12] = // Make a 'Hello, World' string here.
+        static char str[13] = // Make a 'Hello, World' string here.
         return str;
 }
 

@@ -14,7 +14,7 @@ html
 		link(rel="stylesheet" href="/static/codemirror/codemirror-5.60.0/theme/dracula.css")
 	body
 		script.
-			//variables used in .js script
+			//variables used in  lesson-challenge.js script
 			var lesson_id =  #{lesson_id}
 			var unit_id = #{unit_id}
 			var challenge_id = #{challenge_id}
@@ -22,8 +22,6 @@ html
 
 			var tut_unit_id = 0;
 			var tut_lesson1_id = 7;
-			var is_tut_lesson1 = (unit_id == tut_unit_id && lesson_id == tut_lesson1_id);
-			console.log(is_tut_lesson1)
 		style.
 			.breadcrumbs{
 				padding: 10px;
@@ -83,10 +81,7 @@ html
 							});
 							editor.setSize("750","550");
 			div(id="submitcode")
-				if '#{is_tut_lesson1}'
-					button(type="button" id="btnSubmitCode", disabled = 'true') Submit Code
-				else 
-					button(type="button" id="btnSubmitCode") Submit Code
+				button(type="button" id="btnSubmitCode") Submit Code
 			div(id="backtounit")
 				button(type="button", id="btnUnit") Back To Unit
 			div(id='scrollToLesson')
@@ -97,7 +92,4 @@ html
 				div(class="w3-panel w3-card")
 					p(id="response_text") Response and hints will appear here
 					div(id="proceed")
-						if '#{is_tut_lesson1}'
-							button(type="button",id = "btnProceed") Proceed
-						else
-							button(type="button",id = "btnProceed", disabled = 'true') Proceed
+						button(type="button",id = "btnProceed", disabled = "true") Proceed

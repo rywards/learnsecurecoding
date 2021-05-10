@@ -2,35 +2,42 @@ $(function(){
 
 	//query the page for element with id "btnSubmitCode" (among others)
 	var btnSubmit = $('#btnSubmitCode');
+    var btnProceed = $('#btnProceed');
 
 	//add an event handler for the button
 	btnSubmit.on('click', function() {
 		console.log('I was clicked!');
 
-		//contents of the code area
-		var codeAreaContents = editor.getValue();
+        if(unit_id == tut_unit_id && lesson_id == tut_lesson1_id) {
+            btnProceed.prop("disabled",false);
+        }
 
-		var dataToSubmit = {
-			code: codeAreaContents,
-			lesson_id: lesson_id
-		}
 
-		//create a POST request to /challenge/submit (https://api.jquery.com/jQuery.post/)
-		$.post('/unit/'+ unit_id + '/lessons/' + lesson_id +'/' , dataToSubmit)
-		.then(function(data) {
-			console.log(data);
-            document.getElementById("response_text").innerHTML = data['message'];
+        else {
+            //contents of the code area
+            var codeAreaContents = editor.getValue();
 
-            if (data["success_state"] == 1){
-		        var btnProceed = $('#btnProceed');
-                btnProceed.prop("disabled",false);
+            var dataToSubmit = {
+                code: codeAreaContents,
+                lesson_id: lesson_id
             }
 
+            //create a POST request to /challenge/submit (https://api.jquery.com/jQuery.post/)
+            $.post('/unit/'+ unit_id + '/lessons/' + lesson_id +'/' , dataToSubmit)
+            .then(function(data) {
+                console.log(data);
+                document.getElementById("response_text").innerHTML = data['message'];
 
-		})
-		.fail(function(err) {
-			console.log(err);
-		})
+                if (data["success_state"] == 1){
+                    btnProceed.prop("disabled",false);
+                }
+
+            })
+            .fail(function(err) {
+                console.log(err);
+            })
+        }
+
 	})
 })
 
