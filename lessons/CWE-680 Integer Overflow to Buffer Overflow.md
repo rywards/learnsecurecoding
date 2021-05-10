@@ -27,3 +27,6 @@ if (nrest > 0)
 }
 ```
 If nresp has the value 1073741824 and sizeof(char*) has its typical value of 4, then the result of the operation nresp*sizeof(char*) overflows, and the argument to xmalloc() will be 0. Most malloc() implementations will happily allocate a 0-byte buffer, causing the subsequent loop iterations to overflow the heap buffer response.
+
+
+For more examples of this weakness and further information visit: <https://cwe.mitre.org/data/definitions/680.html>
