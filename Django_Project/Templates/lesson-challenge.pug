@@ -19,6 +19,11 @@ html
 			var unit_id = #{unit_id}
 			var challenge_id = #{challenge_id}
 			var num_Lessons = #{num_Lessons}
+
+			var tut_unit_id = 0;
+			var tut_lesson1_id = 7;
+			var is_tut_lesson1 = (unit_id == tut_unit_id && lesson_id == tut_lesson1_id);
+			console.log(is_tut_lesson1)
 		style.
 			.breadcrumbs{
 				padding: 10px;
@@ -39,9 +44,9 @@ html
 				li.breadcrumbs__item
 					a.breadcrumbs__link(href='/') Home
 				li.breadcrumbs__item
-					a.breadcrumbs__link(href='/unit/#{unit_id}/lessons') Unit 1 Overview
+					a.breadcrumbs__link(href='/unit/#{unit_id}/#{section}') Unit #{unit_id} Overview
 				li.breadcrumbs__item
-					a.breadcrumbs__link(href='/unit/#{unit_id}/lessons/#{lesson_id}') Challenge
+					a.breadcrumbs__link(href='/unit/#{unit_id}/#{section}/#{lesson_id}') Challenge
 		p 
 		div(class="w3-container")
 			div(class="challengeBox")
@@ -78,15 +83,21 @@ html
 							});
 							editor.setSize("750","550");
 			div(id="submitcode")
-				button(type="button" id="btnSubmitCode") Submit Code
+				if '#{is_tut_lesson1}'
+					button(type="button" id="btnSubmitCode", disabled = 'true') Submit Code
+				else 
+					button(type="button" id="btnSubmitCode") Submit Code
 			div(id="backtounit")
 				button(type="button", id="btnUnit") Back To Unit
 			div(id='scrollToLesson')
 				button(type = "button", id= "btnScrollLesson") Scroll to Lesson
 			div(id='resetChallenge')
 				button(type = "button", id = "btnReset") Reset Challenge
-			div(class="hints")
+			div(class="hints w3-half")
 				div(class="w3-panel w3-card")
 					p(id="response_text") Response and hints will appear here
 					div(id="proceed")
-						button(type="button",id = "btnProceed", disabled = "true") Proceed
+						if '#{is_tut_lesson1}'
+							button(type="button",id = "btnProceed") Proceed
+						else
+							button(type="button",id = "btnProceed", disabled = 'true') Proceed

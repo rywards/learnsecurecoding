@@ -24,7 +24,7 @@ body
 			li.breadcrumbs__item
 				a.breadcrumbs__link(href='/') Home
 			li.breadcrumbs__item
-				a.breadcrumbs__link(href='/unit/#{unit_id}/lessons') Unit Containing CWE-125
+				a.breadcrumbs__link(href='/unit/#{unit_id}/#{section}') Unit Containing CWE-125
 		hr
 		div(class="w3-center")
 			h2 Out-of-Bounds Reading and Writing
@@ -36,10 +36,13 @@ body
 		hr 
 		.lesson_list
 			- var classList = "animate-background clickable w3-show-block w3-card w3-white w3-padding w3-section w3-hover-light-gray"
+			//Work around code below due to certain missing pieces of functionality in PyPugJS that would be available in PugJS.
+			//Javascript loops aren't functioning correctly in PyPugJS. Can't pass array of lesson_ids into PyPugJS loop. 
+			//The array should contain numbers 1 - n, where n is the the most amount of lessons in any unit.
 			ul 
-				each val in [1,2,3,4,5,6]
+				each val in [1,2,3,4,5,6,7]
 					if val <= numLessons
-						a(class=classList href='/unit/#{unit_id}/lessons/#{val}')
+						a(class=classList href='/unit/#{unit_id}/#{section}/#{val}')
 							div
 								| Lesson #{val}: #{titles[val - 1]}
 								br

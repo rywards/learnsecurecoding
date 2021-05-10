@@ -31,5 +31,7 @@ urlpatterns = [
     path('', include('Django_Project.Application.urls')),
     path('unit/<int:pk>/lessons/', views.ChooseLessonPageView.as_view()),
     path('unit/<int:unit_id>/lessons/<int:pk>/', views.LessonPageView.as_view()),
+    path('unit/<int:pk>/tutorials/', views.ChooseLessonPageView.as_view()),
+    path('unit/<int:unit_id>/tutorials/<int:pk>/',views.LessonPageView.as_view())
 
 ]

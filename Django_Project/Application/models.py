@@ -37,6 +37,7 @@ class Challenge(models.Model):
     lessonid = models.ForeignKey('Lesson', on_delete=models.CASCADE, db_column='lessonID', blank=True, null=True)  # Field name made lowercase.
     challengeoverview = models.CharField(db_column = 'challengeoverview', max_length=3750, blank=True, null=True)
     filekey = models.CharField(db_column='fileKey', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    unitid = models.ForeignKey('Unit', on_delete= models.CASCADE, db_column='unitID', blank=True, null=True) # Field name made lowercase.
 
     class Meta:
         managed = False

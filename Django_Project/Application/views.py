@@ -38,12 +38,39 @@ class LessonPageView(generics.ListCreateAPIView):
 	queryset = Lesson.objects.all()
 	template = './lesson-challenge'
 
+
+	#Continuation of workaround found in 'lesson-challenge.pug'.
+	def get_correct_lesson_id(self, unit_id, lesson_id):
+
+		tutorial_ids = [7,8]
+		tut_unit_id = 0
+		tutorial_id_offset = 6
+
+		if unit_id == tut_unit_id:
+			for tutorial_id in tutorial_ids:
+				if lesson_id == tutorial_id:
+					#if tutorial unit and lesson_id already equals a tutorial_id, return that id
+					return lesson_id
+		
+			#if tutorial unit and not already a tutorial id, add the offset and return
+			#in this case the only numbers that could appear here is 1 or 2
+			return lesson_id + tutorial_id_offset
+			
+		#if not tutorial unit, return the initial lesson_id
+		return lesson_id
+
+
+
+
 	# Handles GET requests
 	def list(self, request, *args, **kwargs):
 		pk = kwargs['pk']
 		unit_id = kwargs['unit_id']
 		if pk != None and unit_id != None:
-			lesson = Lesson.objects.get(lessonid = pk)
+			
+			pk = self.get_correct_lesson_id(unit_id,pk)
+
+			lesson = Lesson.objects.get(lessonid = pk, unitid = unit_id)
 			numLessons = len(self.get_queryset())
 			lesson_material = lesson.lessonmaterial
 			lesson_title = lesson.lessontitle
@@ -56,7 +83,8 @@ class LessonPageView(generics.ListCreateAPIView):
 										'unit_id':unit_id,
 										'challenge_id': challenge_id,
 										'lesson_title': lesson_title,
-										'num_Lessons': numLessons})
+										'num_Lessons': numLessons,
+										'section': 'tutorials' if unit_id == 0 else 'lessons'})
 			
 			return HttpResponse(html)
 		return Response("Error", status= status.HTTP_400_BAD_REQUEST)
@@ -148,11 +176,12 @@ class ChooseLessonPageView(generics.ListAPIView):
 		current_queryset = self.get_queryset().filter(unitid=unitid)
 		descriptions = []
 		titles = []
+
 		for lesson in current_queryset:
 			descriptions.append(lesson.lessondescription)
 			titles.append(lesson.lessontitle)
 
-
+		dictionary['section'] = 'tutorials' if unitid == 0 else 'lessons'
 		dictionary['descriptions'] = descriptions
 		dictionary['titles'] = titles
 		dictionary['numLessons'] = len(current_queryset)
