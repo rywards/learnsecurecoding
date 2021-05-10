@@ -7,3 +7,6 @@ There are many different ways that coders can introduce input validation into th
 While checking for improper input validations it is easy to focus on places where the user is directly able to type information into a box and send it to the server but there are other ways for users to send data that programmers should be aware of. One of the most commonly missed of these is the ability to edit cookies through third party programs allowing the programmer to inject data that the programmer did not validate. This could also allow the user to get around client-side input validation by editing a “validatedStudentEmail” tag to and setting it to true allowing them to send the string “Robert’);DROPTABLE Students;--” as there email causing issues down the line. Fixing issues that stem from these kinds of exploits take much more effort and often require planning to prevent them from the initial design of the project. 
 
 Overall Improper Input Validation is something that all coders should be aware of and keeping an eye out for whenever they are taking data into a program. 
+
+
+For more examples of this weakness and further information visit: <https://cwe.mitre.org/data/definitions/20.html>
