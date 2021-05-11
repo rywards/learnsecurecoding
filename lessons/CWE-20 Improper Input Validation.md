@@ -1,0 +1,24 @@
+## What is Improper Input Validation?
+One way to think of input validation is to think of it like you are writing in a loosely typed language and want to make sure that you are receiving an input that your code will be able to handle. Imagine you are writing a function called ‘ageDoubled’ that can take in an age and multiply it by two.  In a loosely typed language, the function would run whether the input was a ‘char’ ‘int’ or ‘string’ and if your code is not written to handle it the code may error out when it attempts to multiply user input ‘Z’ by 2. When you write code that accepts input from a user you have to make sure that your code is able to react to any data inputted by the user. This can be done by writing a complex function that can handle multiple data types and data in different formats (Like typing out nineteen vs 19). The other way that you validate your inputs is by limiting what the user is able to input. 
+
+
+## Why Does It Matter? 
+Failing to Properly Validate your Inputs can allow users to input things that your code is not able to handle. As mentioned above, inputting a string when a function is written to handle only ‘ints’ could cause your code to throw an error. This can be done both maliciously. This can also be done through users’ impressive ability to find unconventional ways to input data you could not foresee. An example might be someone typing out a phone number word by word as opposed to numerically or using HTML tags in their written response. 
+
+If strings are not properly validated it is possible that a user could input malicious code into your program.  Say you are writing a program that takes in code from a user and checks it for correctness. Someone knowledgeable with how your code functions might be able to input code that calls your ‘nextChallenge’ function allowing them to move on to the next challenge without completing the one they are one. A more serious would be them calling a function that effects your data, an example of this would be them managing to run code that executes your ‘factoryReset’ function.  It is clear that you want to make sure that the code you are running is not going to be able to affect the “Core” of your program. 
+
+## How Can You Prevent These Issues? 
+There are many different tactics that can be taken to help prevent unvalidated data into your program. The first thing that you want to do is keep track of any place where it is possible for the user to input information. From there you can make sure that each of these areas has protections and validators in place. 
+ 
+One option for validation would be allowing the user to input whatever they would like, sending that to the server, and then have the server verify that the input is valid. This may be done to verify emails as writing an email Regex statement is notoriously difficult. When an email is submitted, it is sent to the server which tests to see if it responds, and if it does not, the site asks for a valid address again. While this is an option, it has the server read data before any sort of verification which leaves you open to the injection of malicious inputs.  A second option is adding limitations to the input box in order to prevent improper data types from being inputted. A common example of this is only allowing numbers to be typed in a phone number field. A third method that is often used is only accepting inputs that have been whitelisted. This can be done by implementing a drop-down menu for users to select values from predetermined list so that you can be certain your code is able to handle the selection. 
+
+If you are accepting text from a user you might want to implement regex statements that prevent the execution of code that calls functions in your own code. This would prevent issues stemming from people having knowledge of your source code and prevents users from calling functions they are not supposed to have access to.
+
+When confirming that you are validating your user inputs it is easy to focus on places where the user is directly able to type information into a box and send it to the server but there are other ways for users to send back data that programmers should be aware of. One of the most commonly missed of these is the ability to edit cookies through third party programs allowing the programmer to inject data that the programmer did not validate. Fixing issues that stem from these kinds of exploits take much more effort and often require making decisions to prevent them during the planning and initial design of the project.
+
+Overall Improper Input Validation is something that all coders should be aware of and keeping an eye out for whenever they are taking data into a program.
+
+
+![test](../Django_Project/static/Comic.png)
+
+For more examples of this weakness and further information visit: <https://cwe.mitre.org/data/definitions/20.html>

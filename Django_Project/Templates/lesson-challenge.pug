@@ -4,12 +4,24 @@ html
 	head
 		link(rel="stylesheet" href="/static/css/challengestyle.css")
 		link(rel="stylesheet" href="/static/css/w3.css")
+		link(rel="stylesheet" href="/static/css/style.css")
+		link(rel="stylesheet" href="/static/css/codehighlight.css")
 		script(src="/static/js/jquery.min.js")
 		script(src="/static/js/lesson-challenge.js")
+		script(src = "/static/codemirror/codemirror-5.60.0/lib/codemirror.js")
+		link(rel="stylesheet" href="/static/codemirror/codemirror-5.60.0/lib/codemirror.css")
+		script(src="/static/codemirror/codemirror-5.60.0/mode/clike/clike.js" rel="stylesheet") 
+		link(rel="stylesheet" href="/static/codemirror/codemirror-5.60.0/theme/dracula.css")
 	body
 		script.
+			//variables used in  lesson-challenge.js script
 			var lesson_id =  #{lesson_id}
 			var unit_id = #{unit_id}
+			var challenge_id = #{challenge_id}
+			var num_Lessons = #{num_Lessons}
+
+			var tut_unit_id = 0;
+			var tut_lesson1_id = 7;
 		style.
 			.breadcrumbs{
 				padding: 10px;
@@ -22,55 +34,70 @@ html
 				content: '/';
 				margin: 0 5px;
 			}
-		// list of pages
-		ul.breadcrumbs
-			li.breadcrumbs__item
-				a.breadcrumbs__link(href='/') Home
-			li.breadcrumbs__item
-				a.breadcrumbs__link(href='/unit/#{unit_id}/lessons') Unit 1 Overview
-			li.breadcrumbs__item
-				a.breadcrumbs__link(href='/unit/#{unit_id}/lessons/#{lesson_id}') Challenge
-		div(class="lessonTitle")
-			h1 Learn Secure Coding
-			p 
+		.w3-auto
+			h1 
+				em Learn Secure Coding
+			// list of pages
+			ul.breadcrumbs
+				li.breadcrumbs__item
+					a.breadcrumbs__link(href='/') Home
+				li.breadcrumbs__item
+					a.breadcrumbs__link(href='/unit/#{unit_id}/#{section}') Unit #{unit_id} Overview
+				li.breadcrumbs__item
+					a.breadcrumbs__link(href='/unit/#{unit_id}/#{section}/#{lesson_id}') Challenge
 		p 
 		div(class="w3-container")
 			div(class="challengeBox")
-				div(class="w3-panel w3-card")
-				h3 
-					em Lesson: foo bar
-				p
-					p #{lesson_material}
-			div(class="gotochallengebutton")
-				div(id="js_button_function")
-				//- Load React. Taken from tutorial page
-				//- Note: when deploying, replace "development.js" with "production.min.js".
-				script(src="https://unpkg.com/react@17/umd/react.development.js" crossorigin)
-				script(src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin)
-				//- Load our React component.
-				script(src="/static/js/gotochallenge.js")
-			div(class="codeEnter")
-				div(class="w3-panel w3-card")
-				//-pre
-					For block text (or for scripts), put a . after the tag name
-					code.
-						#include &lt;stdio.h&gt;
-						int main() {
-							printf() displays the string inside quotation
-							printf("Hello, World!");
-							return 0;
-						}
-				form(name="code-enter", method="post")
-					div.input
-					//- to make a block of text (or for scripts), put a . at the end
-					textarea(name="code", id="codeArea" cols="80", rows="20").
-						#{challenge_code}
-			div(id="backtolesson")
-				button(type="button" onclick="alert('Back to Lesson TEMP')") Back to Lesson
+				div(class="w3-panel w3-card w3-white w3-padding-16", id = "lessonTitle")
+					h3 
+						em Lesson: #{lesson_title}
+					p
+						p!=lesson_material
+					div(class="gotochallengebutton")
+						div(id="scrollToChallenge")
+							button(type="button", id = "btnScrollChallenge") Scroll to Challenge
+			div(class="codeEnter", id="codeEnter")
+				div(class="w3-card")
+					//-pre
+						For block text (or for scripts), put a . after the tag name
+						code.
+							#include &lt;stdio.h&gt;
+							int main() {
+								printf() displays the string inside quotation
+								printf("Hello, World!");
+								return 0;
+							}
+					form(name="code-enter", method="post")
+						div.input
+						//- to make a block of text (or for scripts), put a . at the end
+						textarea(name="code", id="codeArea").
+									#{challenge_code}
+						script.
+							var lesson_cookie = 'savedCode_lesson' + lesson_id;
+							var saved_text = localStorage.getItem(lesson_cookie);
+							if (saved_text !== null) {
+								document.getElementById('codeArea').value = saved_text;
+							}
+							var editor = CodeMirror.fromTextArea
+							(document.getElementById('codeArea'),{
+								mode: "clike",		
+								theme: "dracula",
+								lineNumbers: true
+								//height: "auto"
+								//width: "auto"
+							});
+							editor.setSize("auto","auto");
+
 			div(id="submitcode")
 				button(type="button" id="btnSubmitCode") Submit Code
+			div(id="backtounit")
+				button(type="button", id="btnUnit") Back To Unit
+			div(id='scrollToLesson')
+				button(type = "button", id= "btnScrollLesson") Scroll to Lesson
+			div(id='resetChallenge')
+				button(type = "button", id = "btnReset") Reset Challenge
 			div(class="hints")
 				div(class="w3-panel w3-card")
-					p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+					p(id="response_text") Response and hints will appear here
 					div(id="proceed")
-						button(type="button" onclick="alert('Proceed TEMP')") Proceed
+						button(type="button",id = "btnProceed", disabled = "true") Proceed

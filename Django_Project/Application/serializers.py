@@ -13,19 +13,19 @@ from Django_Project.Application.models import UsrAnswers
 class UnitSerializer(serializers.ModelSerializer): 
     class Meta: 
         model = Unit
-        fields = ['unitid','unitoverview']
+        fields = ['unitid','unitoverview','unittitle']
 
 
 class LessonSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Lesson
-        fields = ['lessonid','unitid','lessonmaterial']
+        fields = ['lessonid','unitid','lessonmaterial', 'lessontitle', 'lessondescription']
 
 
 class ChallengeSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Challenge
-        fields = ['challengeid','lessonid','challengeoverview']
+        fields = ['challengeid','lessonid','challengeoverview', 'filekey', 'unitid']
 
 
 class UsrAnswerSerializer(serializers.ModelSerializer):

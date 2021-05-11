@@ -1,0 +1,7 @@
+An Out-of-bounds Read error describes when a weakness in code allows the user to read information outside of the scope of what was intended. This issue is prevalent in both C and C++ and is most commonly caused by the coder not making sure that every call to find something at a specific index is bounded correctly. 
+
+This can happen for many reasons, one of the most common causes for this is that the user misjudges how many times they will need to cycle through an index and increments through it one too many times. This causes the search function to try to pull something from a location in the index that does not exist. When this happens the search, function returns the data that was in the memory location of the imaginary index.
+
+
+
+For more examples of this weakness and further information visit: <https://cwe.mitre.org/data/definitions/125.html>
