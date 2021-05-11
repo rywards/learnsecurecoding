@@ -70,16 +70,24 @@ html
 					form(name="code-enter", method="post")
 						div.input
 						//- to make a block of text (or for scripts), put a . at the end
-						textarea(name="code", id="codeArea", cols="750", rows="650").
-							#{challenge_code}
+						textarea(name="code", id="codeArea").
+									#{challenge_code}
 						script.
+							var lesson_cookie = 'savedCode_lesson' + lesson_id;
+							var saved_text = localStorage.getItem(lesson_cookie);
+							if (saved_text !== null) {
+								document.getElementById('codeArea').value = saved_text;
+							}
 							var editor = CodeMirror.fromTextArea
 							(document.getElementById('codeArea'),{
-								mode: "clike",
+								mode: "clike",		
 								theme: "dracula",
 								lineNumbers: true
+								//height: "auto"
+								//width: "auto"
 							});
-							editor.setSize("750","550");
+							editor.setSize("auto","auto");
+
 			div(id="submitcode")
 				button(type="button" id="btnSubmitCode") Submit Code
 			div(id="backtounit")

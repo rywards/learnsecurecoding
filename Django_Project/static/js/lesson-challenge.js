@@ -17,7 +17,7 @@ $(function(){
             //contents of the code area
             var codeAreaContents = editor.getValue();
 
-            var dataToSubmit = {
+            var dataToSubmit = {    
                 code: codeAreaContents,
                 lesson_id: lesson_id
             }
@@ -53,6 +53,16 @@ $(function(){
     })
 })
 
+//This funtion sets the previous code cookie
+$(function(){
+    //var codeArea = $('#codeArea');
+    editor.on('change', function(){
+        var codeAreaContents = editor.getValue();
+        var lesson_cookie = 'savedCode_lesson' + lesson_id; 
+        localStorage.setItem(lesson_cookie, codeAreaContents);
+    });
+})
+
 //This function is meant to be used by a button on the lesson-challenge page
 //in order to reset the challenge for that given lesson. 
 $(function(){
@@ -63,10 +73,12 @@ $(function(){
     btnReset.on('click', function(){
 
         $.ajax({
-            url:'/challenges/' + challenge_id + '.json/',
+            url:'/challenges/' + challenge_id + '.json/',   
             method: "GET",
             dataType: 'json',
             success: function(response){
+                var lesson_cookie = 'savedCode_lesson' + lesson_id;
+                localStorage.removeItem(lesson_cookie);
                 editor.getDoc().setValue(response['challengeoverview'])
             }
         });
