@@ -94,8 +94,8 @@ int main() {
         i++;
 	}
 	
-    printf("Has expected NULL pointer index: %s\n", hasExpectedNULL ? "PASS" : "FAIL");
-    printf("Has expected values: %s\n", hasExpectedValues ? "PASS" : "FAIL");
+    printf("Does the array contain the Null Pointer it needs to signify the end of the array?: %s\n", hasExpectedNULL ? "PASS" : "FAIL");
+    printf("Does the array return the expected values at the expected indices?: %s\n", hasExpectedValues ? "PASS" : "FAIL");
 	
 	//free(userValues);
 	

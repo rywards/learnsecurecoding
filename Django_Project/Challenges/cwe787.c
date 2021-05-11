@@ -126,9 +126,9 @@ int main() {
     }
 
     //print out what has passed or what has failed
-    printf("Writing Regular (Expected) Indices: %s\n", checkExpectedValues ? "PASS" : "FAIL");
-    printf("Writing to Negative Indices: %s\n", checkNegativeValues ? "PASS" : "FAIL");
-    printf("Writing to Indices Greater than Length of Array: %s\n", checkExpectedValues ? "PASS" : "FAIL");
+    printf("When given a valid index, is the indices value changed correctly?: %s\n", checkExpectedValues ? "PASS" : "FAIL");
+    printf("When given a negative index, does the function return -1?: %s\n", checkNegativeValues ? "PASS" : "FAIL");
+    printf("When given a index outside the size of the array, does the function return -1?: %s\n", checkExpectedValues ? "PASS" : "FAIL");
 
     return 0; 
 }

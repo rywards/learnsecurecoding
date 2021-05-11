@@ -79,7 +79,7 @@ int main() {
         }
     }
 
-    printf("Did you fix the memory allocation issue: %s\n",  didPass ? "PASS" : "FAIL");
+    printf("Was the present Integer Overflow that lead to a Buffer Overflow fixed?: %s\n",  didPass ? "PASS" : "FAIL");
 
     return 0;
     
