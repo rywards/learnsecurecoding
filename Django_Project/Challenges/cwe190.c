@@ -76,7 +76,7 @@ int main() {
         didPass = true;
     }
 
-    printf("Was the overflow fixed: %s\n",  didPass ? "PASS" : "FAIL");
+    printf("Was the Integer Overflow that was present in the code fixed?: %s\n",  didPass ? "PASS" : "FAIL");
    
     return 0;
 }

@@ -83,9 +83,9 @@ int main() {
 	}
 	
 	//print out whether pass or fail
-	printf("Regular (Expected) Values: %s\n", checkExpectedValues ? "PASS" : "FAIL");
-	printf("Requesting Negative Values: %s\n", checkNegativeValues ? "PASS" : "FAIL");
-	printf("Requesting Greater Values than Maximum: %s\n", checkGreaterValues ? "PASS" : "FAIL");
+	printf("Did indices within the bounds of the array return the correct value?: %s\n", checkExpectedValues ? "PASS" : "FAIL");
+	printf("Did the function return -1 when given a negative index?: %s\n", checkNegativeValues ? "PASS" : "FAIL");
+	printf("Did the function return -1 when given a index outside the size of the array?: %s\n", checkGreaterValues ? "PASS" : "FAIL");
 	
 	return 0;
 }

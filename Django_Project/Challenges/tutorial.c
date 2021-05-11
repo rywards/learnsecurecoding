@@ -37,7 +37,7 @@ int main() {
         hasHello = false;
     }
 	
-    printf("Has expected return value: %s\n", hasHello ? "PASS" : "FAIL");
+    printf("Did the function return the string 'Hello, World'?: %s\n", hasHello ? "PASS" : "FAIL");
 	
 	//free(userValues);
 	

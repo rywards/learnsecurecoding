@@ -109,7 +109,7 @@ int main() {
             break;
         }
     }
-    printf("Were all values checked: %s\n",  didPass ? "PASS" : "FAIL");
+    printf("Was every element's value checked to make sure it is within the bounds of MIN_VAL and MAX_VAL?: %s\n",  didPass ? "PASS" : "FAIL");
     return 0;
     
 }
