@@ -32,12 +32,12 @@ In most other languages today, something like this would be detected at runtime,
 
 Since this is the case, we want to make sure our C code contains no segmentation faults. This means we need to prevent Out-of-Bounds Writing. 
 
-### Why does it matter?
+## Why does it matter?
 Why is preventing Out-of-Bounds writing so important? If the above example code were to be run and the segmentation fault was not detected, then the code would
 overrite any data that is located right next to our array in memory. Overwriting data that we are not supposed to overwrite can result in many different, undesired behaviors. 
 These behaviors can range from simply editing a value we did not intend to edit, to crashing the system. In the worse case, if a program has an Out-of-Bounds Write vulnerability, it could be exploited by a hacker to run unauthorized code by the program. This in turn could allow the hacker to have access to information they should not have access to, or do something even more nefarious.
 
-### How do I prevent it?
+## How do I prevent it?
 So when it comes to writing values to elements in an array, how can we make sure that an Out-of-Bounds Write error does not occur? Before using a number as an index to write to an array element, we must make sure that number is within the bounds of our arrays length. Remember, arrays always start at index 0, so we can not accept an index that is less than 0. Since arrays start at index 0, it is also important to remember that the index of the last element in the array is always the length of the array minus 1. If we take another look at the example above, we see that the size of the array is 4, but the largest number that can be used as an index for the array is 3 (4-1). 
 
 For more examples of this weakness and further information visit: <https://cwe.mitre.org/data/definitions/787.html>
