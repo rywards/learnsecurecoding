@@ -21,28 +21,33 @@ body
 		em Learn Secure Coding
 	ul.breadcrumbs
 		li.breadcrumbs__item
-			a.breadcrumbs__link(href='/') Home 
+			a.breadcrumbs__link(href='/') Home
 	p.welcome_text
-		| Welcome to the learn secure coding website. We made this website to teach aspiring coders secure coding practices by 
-    | educating them on common security vulnerabilities according to the CWE (Common Weakness Enumeration). Feel free to explore our 
-    | tutorial unit and any others you might be interested in. 
-	hr 
+		| Welcome to the learn secure coding website. We made this website to teach aspiring coders secure coding practices by
+		| educating them on common security vulnerabilities according to the CWE (Common Weakness Enumeration). Feel free to explore our
+		| tutorial unit and any others you might be interested in.
+	hr
 	h1 Pick a Unit
 	.unit_list.w3-auto
 		- var classList = "animate-background clickable no-underline w3-show-block w3-card w3-padding w3-section w3-hover-light-gray w3-white w3-border-dark-gray w3-border"
 		a(class=classList href='/unit/0/tutorials')
 			div
 				h3 #{unit_0_title}
-			p #{unit_0}
+			p 
+				| #{unit_0}
+			.container
+				p Language: #{unit_0_language}
+				p Lessons: #{unit_0_numLessons}
+				p Difficulty: #{unit_0_difficulty}
 		a(class=classList href='/unit/1/lessons')
 			div
 				h3 #{unit_1_title}
 			p
 				| #{unit_1}
 			.container
-				p Language: C
-				p Lessons: 1
-				p Difficulty: 4
+				p Language: #{unit_1_language}
+				p Lessons: #{unit_1_numLessons}
+				p Difficulty: #{unit_1_difficulty}
 
 
 

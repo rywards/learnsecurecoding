@@ -14,6 +14,8 @@ class Unit(models.Model):
     unitid = models.CharField(db_column='unitID', primary_key=True, max_length=4)  # Field name made lowercase.
     unitoverview = models.CharField(db_column = 'unitoverview', max_length=3750, blank=True, null=True)
     unittitle = models.CharField(db_column='unitTitle', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    unitlanguage = models.CharField(db_column='unitLanguage', max_length= 20, blank=True, null =True)
+    unitdifficulty = models.CharField(db_column='unitDifficulty', max_length= 2, blank=True, null=True )
 
     class Meta:
         managed = False
@@ -25,7 +27,7 @@ class Lesson(models.Model):
     unitid = models.ForeignKey('Unit', on_delete= models.CASCADE, db_column='unitID', blank=True, null=True)  # Field name made lowercase.
     lessonmaterial = models.CharField(db_column = 'lessonmaterial', max_length=7500, blank=True, null=True)
     lessontitle = models.CharField(db_column='lessonTitle', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    lessondescription = models.CharField(db_column='lessonDescription', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    lessondescription = models.CharField(db_column='lessonDescription', max_length=350, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False

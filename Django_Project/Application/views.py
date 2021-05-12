@@ -71,7 +71,7 @@ class LessonPageView(generics.ListCreateAPIView):
 			pk = self.get_correct_lesson_id(unit_id,pk)
 
 			lesson = Lesson.objects.get(lessonid = pk, unitid = unit_id)
-			numLessons = len(self.get_queryset())
+			numLessons = len(Lesson.objects.filter(unitid = unit_id))
 			lesson_material = lesson.lessonmaterial
 			lesson_title = lesson.lessontitle
 			challenge = Challenge.objects.get(lessonid=pk)
@@ -140,10 +140,16 @@ class HomePageView(generics.ListAPIView):
 		dictionary = {}
 		var_base_name = 'unit_'
 		title_var_ending = '_title'
+		lang_var_ending = '_language'
+		diff_var_ending = '_difficulty'
+		numLessons_ending = '_numLessons'
 		current_queryset = self.get_queryset()
 		for unit in current_queryset:
 			dictionary[var_base_name + unit.unitid] = unit.unitoverview
 			dictionary[var_base_name + unit.unitid + title_var_ending] = unit.unittitle
+			dictionary[var_base_name + unit.unitid + lang_var_ending] = unit.unitlanguage
+			dictionary[var_base_name + unit.unitid + diff_var_ending] = unit.unitdifficulty
+			dictionary[var_base_name + unit.unitid + numLessons_ending] = len(Lesson.objects.filter(unitid = unit.unitid))
 
 
 		return dictionary
@@ -185,6 +191,11 @@ class ChooseLessonPageView(generics.ListAPIView):
 		dictionary['descriptions'] = descriptions
 		dictionary['titles'] = titles
 		dictionary['numLessons'] = len(current_queryset)
+		unit = Unit.objects.get(unitid = unitid)
+		dictionary['unit_title'] = unit.unittitle
+		dictionary['unit_desc'] = unit.unitoverview
+		dictionary['unit_language'] = unit.unitlanguage
+		dictionary['unit_difficulty'] = unit.unitdifficulty
 
 		return dictionary
 

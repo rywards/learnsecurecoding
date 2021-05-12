@@ -13,7 +13,7 @@ from Django_Project.Application.models import UsrAnswers
 class UnitSerializer(serializers.ModelSerializer): 
     class Meta: 
         model = Unit
-        fields = ['unitid','unitoverview','unittitle']
+        fields = ['unitid','unitoverview','unittitle', 'unitlanguage', 'unitdifficulty']
 
 
 class LessonSerializer(serializers.ModelSerializer):
