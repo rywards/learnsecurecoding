@@ -17,6 +17,7 @@ matchRegexes = {
 	'cwe190': None,
 	'cwe680': None,
 	'cwe787': None,
+	'unitoneFINAL' : None,
 	'tutorial': None
 }
 
@@ -98,6 +99,10 @@ def JoinCompileAndRun(fileName, userCode):
 			print(has_passed)
 			print(fail_reasons)
 		elif (fileName == 'cwe680'):
+			has_passed, fail_reasons = cwe_check(executablePath, 1)
+			print(has_passed)
+			print(fail_reasons)
+		elif (fileName == 'unitoneFINAL'):
 			has_passed, fail_reasons = cwe_check(executablePath, 1)
 			print(has_passed)
 			print(fail_reasons)
@@ -276,6 +281,9 @@ if __name__ == '__main__':
 
 	cwe680_testGOOD = "int buffOverflow(){ int *buffer; short int memToAllocate = 32766; buffer = (int*) malloc(memToAllocate); free(buffer); return memToAllocate;}"
 	cwe680_testBAD = "int buffOverflow(){ int *buffer; short int memToAllocate = 32766; memToAllocate += 5; buffer = (int*) malloc(memToAllocate); free(buffer); return memToAllocate;}"
+
+	unitone_testGOOD = "int finalChallenge(int *numArr) {int *buffer;int memToAllocate = 0;for (int i = 0; i < sizeof(numArr)+1; i++) {if ((numArr[i] > MAX_VAL) || (numArr[i] < MIN_VAL)) {memToAllocate += 0;}else {memToAllocate += numArr[i];}} buffer = (int*) malloc(memToAllocate);free(buffer);return memToAllocate;}"
+	unitone_testBAD = "int finalChallenge(int *numArr){/*Ensure the code does not overflow and allocate the wrong amount of memory. MIN_VAL is 0; MAX_VAL is 32766.*/int *buffer;short int memToAllocate = 0;for (int i = 0; i < sizeof(numArr)+1; i++){memToAllocate += numArr[i];}buffer = (int*) malloc(memToAllocate);free(buffer);return memToAllocate;}"
 	#test run these three (now blah blah number) binaries
 	# print(RunChecker('cwe125', testUserCode1, 'title1', 'title2'))
 	# print(RunChecker('cwe125', testUserCode2, 'title1', 'title2'))
@@ -295,5 +303,7 @@ if __name__ == '__main__':
 
 	#print(RunChecker('cwe680', cwe680_testGOOD, 'title1', 'title2'))
 	#print(RunChecker('cwe680', cwe680_testBAD, 'title1', 'title2'))
+	#print(RunChecker('unitoneFINAL', unitone_testBAD, 'title1', 'title2'))
+	#print(RunChecker('unitoneFINAL', unitone_testGOOD, 'title1', 'title2'))
 
 
