@@ -6,7 +6,7 @@ When a program takes input from a user, there is never a guarantee that they wil
 ### Input Validation
 The act of _validating_ a user's _input_, to make sure it is something that is expected and can be dealt with, is called input validation. Input validation in the previous example can be done different ways. One way is to write a complex function that can handle multiple data types and data in different formats (Like typing out nineteen vs 19). The other way to validate your inputs is by limiting what the user is able to input.
 
-## Why Does It Matter? 
+## Why does it matter? 
 Failing to properly validate user input can result in users inputting things the code cannot handle, leading to errors, incorrect results, or crashes. As mentioned above, inputting a string when a function is written to handle only integers could cause your code to throw an error. Another example might be someone typing out a phone number word by word as opposed to numerically or using HTML tags in their written response. Not all users will play by the rules, and some may even be malicious. Never underestimate users’ impressive ability to find unconventional ways to input data that you did not foresee. And most important of all, **Never Trust the User.**
 
 If strings are not properly validated, it can be possible for users to input malicious code into your program. One common example is SQL injection. If SQL queries are not properly prepared and data is not properly validated, a user can do some very bad things to the database. **Never Trust the User.**
