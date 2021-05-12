@@ -2,13 +2,13 @@
 // Original html by Ryan Edwards
 html
 	head
-		link(rel="stylesheet" href="/static/css/challengestyle.css")
+		link(rel="stylesheet" href="/static/css/challengestyle.css?v=1")
 		link(rel="stylesheet" href="/static/css/w3.css")
-		link(rel="stylesheet" href="/static/css/style.css")
+		link(rel="stylesheet" href="/static/css/style.css?v=1")
 		link(rel="stylesheet" href="/static/css/codehighlight.css")
 		script(src="/static/js/jquery.min.js")
-		script(src="/static/js/lesson-challenge.js")
-		script(src = "/static/codemirror/codemirror-5.60.0/lib/codemirror.js")
+		script(src="/static/js/lesson-challenge.js?v=1")
+		script(src="/static/codemirror/codemirror-5.60.0/lib/codemirror.js")
 		link(rel="stylesheet" href="/static/codemirror/codemirror-5.60.0/lib/codemirror.css")
 		script(src="/static/codemirror/codemirror-5.60.0/mode/clike/clike.js" rel="stylesheet") 
 		link(rel="stylesheet" href="/static/codemirror/codemirror-5.60.0/theme/dracula.css")
@@ -47,12 +47,13 @@ html
 					a.breadcrumbs__link(href='/unit/#{unit_id}/#{section}/#{lesson_id}') Challenge
 		p 
 		div(class="w3-container")
-			div(class="challengeBox")
-				div(class="w3-panel w3-card w3-white w3-padding-16", id = "lessonTitle")
-					h3 
-						em Lesson: #{lesson_title}
-					p
-						p!=lesson_material
+			div(class="challengeBox w3-panel w3-card w3-white w3-padding-16")
+				div(class="w3-auto")
+					div(id="lessonTitle")
+						h2 
+							em Lesson: #{lesson_title}
+					div(class="")
+						div!=lesson_material
 					div(class="gotochallengebutton")
 						div(id="scrollToChallenge")
 							button(type="button", id = "btnScrollChallenge") Scroll to Challenge
@@ -87,17 +88,19 @@ html
 								//width: "auto"
 							});
 							editor.setSize("auto","auto");
-
-			div(id="submitcode")
-				button(type="button" id="btnSubmitCode") Submit Code
-			div(id="backtounit")
-				button(type="button", id="btnUnit") Back To Unit
-			div(id='scrollToLesson')
-				button(type = "button", id= "btnScrollLesson") Scroll to Lesson
-			div(id='resetChallenge')
-				button(type = "button", id = "btnReset") Reset Challenge
-			div(class="hints w3-half")
-				div(class="w3-panel w3-card")
-					p(id="response_text") Response and hints will appear here
-					div(id="proceed")
-						button(type="button",id = "btnProceed", disabled = "true") Proceed
+			div(class="infoPanel w3-rest")
+				div(class="w3-center")
+					div(id="submitcode" class="infoPanelButton")
+						button(type="button" id="btnSubmitCode") Submit Code
+					div(id='scrollToLesson' class="infoPanelButton")
+						button(type = "button", id= "btnScrollLesson") Scroll to Lesson
+					div(id='resetChallenge' class="infoPanelButton")
+						button(type = "button", id = "btnReset") Reset Challenge
+				div(class="hints w3-col")
+					div(class="w3-panel w3-card")
+						p(id="response_text") 
+							i Response and hints will appear here.
+						div(id="proceed" class="infoPanelButton")
+							button(type="button",id = "btnProceed", disabled = "true") Proceed
+				div(id="backtounit" class="infoPanelButton")
+					button(type="button", id="btnUnit") Return to Unit Overview
