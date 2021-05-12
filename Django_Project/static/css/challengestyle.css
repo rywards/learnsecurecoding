@@ -8,8 +8,31 @@ body {
 }
 .codeEnter {
     float: left;
-    width: 85%;
+    width: 70%;
+	height: 100%;
+	padding: 16px 0px;
+	max-width: 1200px;
 }
+.infoPanel{
+	height: 100%;
+	padding: 16px 16px;
+}
+.infoPanelButton{
+	text-align: center;
+	padding: 4px 0px;
+	margin: auto;
+}
+.infoPanelButton button{
+	min-width: 120px;
+}
+.infoPanelButton button:not([disabled="true"]){
+	cursor: pointer;
+}
+
+.gotochallengebutton{
+	text-align: center;
+}
+
 .hints {
     float:left;
     width: 10%;
@@ -17,16 +40,33 @@ body {
 .w3-panel{
     background-color: lightgray;
 }
-.gotochallengebutton {
-    text-align: center;
-}
-.backtolesson{
-    text-align: right;
-}
-.submitcode {
-    text-align: right;
-}
-.proceed {
-    
+
+pre{
+	white-space: pre-wrap;
 }
 
+.overlay{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+	background-color: rgba(0, 0, 0, 0.4);
+}
+.overlay p{
+	margin: 48px auto;
+	color: white;
+	text-align: center;
+	text-shadow: 1px 1px 2px black;
+}
+
+@media(max-width: 900px) {
+	.codeEnter{
+		width: 100%;
+		height: 80%;
+		min-height: 800px;
+	}
+}
