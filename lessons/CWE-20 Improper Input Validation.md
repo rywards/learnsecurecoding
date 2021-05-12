@@ -13,7 +13,7 @@ If strings are not properly validated, it can be possible for users to input mal
 
 ![test](https://imgs.xkcd.com/comics/exploits_of_a_mom.png)
 
-## How Can You Prevent These Issues? 
+## How do I prevent it? 
 Once again: **Never Trust the User.** There are many different tactics that can be taken to help prevent unvalidated data into your program. The first thing that you want to do is keep track of any place where it is possible for the user to input information. From there you can make sure that each of these areas has protections and validators in place. 
 
 One option for input validation is to add limitations to the input box in order to prevent improper data types from being inputted. A common example of this is only allowing numbers to be typed in a phone number field. A second method that is often used is only accepting inputs that have been whitelisted. This can be done by implementing a drop-down menu for users to select values from predetermined list so that you can be certain your code is able to handle the selection. And the third, most important method is to reject any input that is not expected. You shouldn't just use one method for input validation. Each is a line of defense, and no one line of defense is 100% perfect.
