@@ -42,9 +42,9 @@ class LessonPageView(generics.ListCreateAPIView):
 	#Continuation of workaround found in 'lesson-challenge.pug'.
 	def get_correct_lesson_id(self, unit_id, lesson_id):
 
-		tutorial_ids = [7,8]
+		tutorial_ids = [8,9]
 		tut_unit_id = 0
-		tutorial_id_offset = 6
+		tutorial_id_offset = 7
 
 		if unit_id == tut_unit_id:
 			for tutorial_id in tutorial_ids:
